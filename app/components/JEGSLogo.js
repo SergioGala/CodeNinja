@@ -1,23 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 
 export default function JEGSLogo() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const rect = e.currentTarget.getBoundingClientRect()
-      setMousePos({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       <svg
@@ -205,12 +190,11 @@ export default function JEGSLogo() {
           <motion.circle
             cx="200"
             cy="200"
-            r="40"
             fill="none"
             stroke="#06b6d4"
             strokeWidth="1"
-            opacity="0.3"
-            animate={{
+            initial={{ r: 40, opacity: 0.3 }}
+            animate={{ 
               r: [40, 60, 40],
               opacity: [0.3, 0, 0.3],
             }}
@@ -224,11 +208,10 @@ export default function JEGSLogo() {
           <motion.circle
             cx="200"
             cy="200"
-            r="35"
             fill="none"
             stroke="#9333ea"
             strokeWidth="1"
-            opacity="0.4"
+            initial={{ r: 35, opacity: 0.4 }}
             animate={{
               r: [35, 50, 35],
               opacity: [0.4, 0, 0.4],
@@ -248,8 +231,8 @@ export default function JEGSLogo() {
             r="25"
             fill="url(#cyanGlow)"
             filter="url(#strongGlow)"
+            initial={{ opacity: 0.9 }}
             animate={{
-              scale: [1, 1.1, 1],
               opacity: [0.9, 1, 0.9],
             }}
             transition={{
@@ -356,17 +339,20 @@ export default function JEGSLogo() {
         {[...Array(12)].map((_, i) => {
           const angle = (i * 30 * Math.PI) / 180
           const radius = 80
+          const initialX = 200 + Math.cos(angle) * radius
+          const initialY = 200 + Math.sin(angle) * radius
+          const finalX = 200 + Math.cos(angle + (i * 0.1)) * (radius + 10)
+          const finalY = 200 + Math.sin(angle + (i * 0.1)) * (radius + 10)
+          
           return (
             <motion.circle
               key={i}
-              cx={200 + Math.cos(angle) * radius}
-              cy={200 + Math.sin(angle) * radius}
               r="2"
               fill={i % 2 === 0 ? '#06b6d4' : '#9333ea'}
-              opacity="0.6"
+              initial={{ cx: initialX, cy: initialY, opacity: 0.3 }}
               animate={{
-                cx: 200 + Math.cos(angle + (i * 0.1)) * (radius + 10),
-                cy: 200 + Math.sin(angle + (i * 0.1)) * (radius + 10),
+                cx: [initialX, finalX, initialX],
+                cy: [initialY, finalY, initialY],
                 opacity: [0.3, 0.8, 0.3],
               }}
               transition={{
