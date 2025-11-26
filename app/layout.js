@@ -1,27 +1,27 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Desarrollo Web y Apps Móviles | Equipo React & Python',
-  description: 'Equipo de 4 desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas. Consultoría gratuita. Proyectos escalables con calidad asegurada.',
-  keywords: 'desarrollo web, react, nextjs, python, nodejs, app móvil, desarrollo software, programadores freelance, MVP',
-  authors: [{ name: 'Tu Equipo Dev' }],
-  creator: 'Tu Equipo Dev',
-  publisher: 'Tu Equipo Dev',
-  metadataBase: new URL('https://tudominio.com'),
+  title: 'JEG Studios | Desarrollo Web y Apps Móviles | React, Python, Node.js',
+  description: 'Equipo de 4 desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas. Consultoría gratuita. Proyectos web y móviles escalables con calidad garantizada.',
+  keywords: 'desarrollo web, react, nextjs, python, nodejs, app móvil, desarrollo software, programadores freelance, MVP, JEG Studios, aplicaciones web',
+  authors: [{ name: 'JEG Studios' }],
+  creator: 'JEG Studios',
+  publisher: 'JEG Studios',
+  metadataBase: new URL('https://jegstudios.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Desarrollo Web y Apps Móviles | Equipo React & Python',
-    description: 'Equipo de 4 desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas.',
-    url: 'https://tudominio.com',
-    siteName: 'Tu Equipo Dev',
+    title: 'JEG Studios | Desarrollo Web y Apps Móviles',
+    description: 'Equipo de 4 desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas con calidad asegurada.',
+    url: 'https://jegstudios.com',
+    siteName: 'JEG Studios',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tu Equipo Dev - Desarrollo Web Profesional',
+        alt: 'JEG Studios - Desarrollo Web y Apps Móviles Profesional',
       },
     ],
     locale: 'es_ES',
@@ -29,7 +29,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Desarrollo Web y Apps Móviles | Equipo React & Python',
+    title: 'JEG Studios | Desarrollo Web y Apps Móviles',
     description: 'MVP en 4-6 semanas. React, Python, Node.js. Consultoría gratuita.',
     images: ['/og-image.jpg'],
   },
@@ -51,6 +51,7 @@ export default function RootLayout({ children }) {
     <html lang="es">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#06b6d4" />
       </head>
       <body className="antialiased">
         {children}

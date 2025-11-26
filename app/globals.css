@@ -15,7 +15,12 @@
   }
   
   body {
-    @apply bg-white text-dark-900;
+    @apply bg-[#0a0a0f] text-white antialiased;
+    font-family: var(--font-inter);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
   }
 }
 
@@ -23,36 +28,60 @@
   .text-balance {
     text-wrap: balance;
   }
-  
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-600;
+
+  /* Animated gradient for text */
+  @keyframes gradient-x {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
-  
-  .card-hover {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl;
+
+  .animate-gradient {
+    animation: gradient-x 3s ease infinite;
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - tech style */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #0a0a0f;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0ea5e9;
-  border-radius: 5px;
+  background: linear-gradient(180deg, #06b6d4, #9333ea);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0284c7;
+  background: linear-gradient(180deg, #0891b2, #7e22ce);
 }
 
 /* Selection */
 ::selection {
-  background-color: #bae6fd;
-  color: #0c4a6e;
+  background-color: rgba(6, 182, 212, 0.3);
+  color: #fff;
+}
+
+/* Smooth animations */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glow effect for focused inputs */
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+}
+
+/* Prevent text selection on animated elements */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
