@@ -539,33 +539,33 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: 'Tu Proyecto 1',
-                url: 'https://tuproyecto1.com',
-                category: 'E-commerce',
-                description: 'Plataforma de ventas online con integración de pagos y gestión de inventario.',
-                tech: ['Next.js', 'Stripe', 'Tailwind'],
-                metric: '150% ↑ conversión',
-                image: 'https://via.placeholder.com/600x400/0ea5e9/ffffff?text=Proyecto+1',
-                gradient: 'from-cyan-500 to-blue-500'
-              },
-              {
-                name: 'Tu Proyecto 2',
-                url: 'https://tuproyecto2.com',
-                category: 'SaaS',
-                description: 'Dashboard analítico con visualización de datos en tiempo real.',
+                name: 'SportBar League',
+                url: 'https://sample-service-name-2ppv.onrender.com/',
+                category: 'Web',
+                description: 'Web social de grupos y eventos abiertos.',
                 tech: ['React', 'Python', 'PostgreSQL'],
-                metric: '10K+ usuarios',
-                image: 'https://via.placeholder.com/600x400/9333ea/ffffff?text=Proyecto+2',
+                metric: '4.8★ rating',
+                image: './Bar.png',
                 gradient: 'from-purple-500 to-pink-500'
               },
               {
-                name: 'Tu Proyecto 3',
-                url: 'https://tuproyecto3.com',
-                category: 'App Móvil',
-                description: 'Aplicación móvil para gestión de tareas con sincronización en la nube.',
-                tech: ['React Native', 'Node.js', 'MongoDB'],
-                metric: '4.8★ rating',
-                image: 'https://via.placeholder.com/600x400/06b6d4/ffffff?text=Proyecto+3',
+                name: 'Sentya',
+                url: 'https://sentya.aossa.es/',
+                category: 'Web',
+                description: 'Plataforma de gestion de talleres sociales de ayuntamientos de Andalucia.',
+                tech: ['React', 'Phyton', 'PostgreSQL'],
+                metric: '10K+ usuarios',
+                image: './Sentya.png',
+                gradient: 'from-cyan-500 to-blue-500'
+              },
+              {
+                name: 'Futuro estudio',
+                url: 'https://web-dev-two-livid.vercel.app/',
+                category: 'web',
+                description: 'Futuro estudio del grupo.',
+                tech: ['React', 'Node.js', "javascript", "particle", "tailwind"],
+                metric: 'demo',
+                image: './Monks.png',
                 gradient: 'from-cyan-500 to-purple-500'
               },
             ].map((project, index) => (
@@ -587,9 +587,7 @@ export default function Home() {
                     {/* Placeholder - Aquí irá tu screenshot real */}
                     <div className="relative w-full h-full flex items-center justify-center">
                       <div className="text-center p-6">
-                        <div className="text-4xl mb-2">🖼️</div>
-                        <p className="text-sm text-gray-400">Reemplaza con screenshot</p>
-                        <p className="text-xs text-gray-500 mt-1">de {project.name}</p>
+                        <img src={project.image} alt={project.name}/>
                       </div>
                     </div>
 
@@ -686,14 +684,6 @@ export default function Home() {
             viewport={{ once: true }}
             className="mt-12 text-center"
           >
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-500/10 border border-cyan-500/20 rounded-full backdrop-blur-sm">
-              <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span className="text-sm text-gray-400">
-                <span className="text-cyan-400 font-semibold">Tip:</span> Reemplaza los datos de ejemplo con tus proyectos reales (nombre, URL, screenshot)
-              </span>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -760,7 +750,6 @@ export default function Home() {
                   <div className="font-display text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
                     {item.step}
                   </div>
-                  <div className="text-4xl mb-4">{item.icon}</div>
                   <h3 className="font-display text-xl font-bold text-white mb-3">{item.title}</h3>
                   <p className="text-gray-400">{item.description}</p>
                 </div>
@@ -1033,9 +1022,7 @@ export default function Home() {
             <div>
               <h4 className="font-display font-bold mb-4 text-white">Contacto</h4>
               <ul className="space-y-2 text-gray-400">
-                <li>📧 hola@jegstudios.com</li>
-                <li>📱 +34 600 000 000</li>
-                <li>📍 Madrid, España</li>
+                <li>jegstudiotech@gmail.com</li>
               </ul>
             </div>
           </div>
