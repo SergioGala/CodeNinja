@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,20 +26,6 @@
   .text-balance {
     text-wrap: balance;
   }
-
-  /* Animated gradient for text */
-  @keyframes gradient-x {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  .animate-gradient {
-    animation: gradient-x 3s ease infinite;
-  }
 }
 
 /* Custom scrollbar - tech style */
@@ -68,11 +52,6 @@
   color: #fff;
 }
 
-/* Smooth animations */
-* {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* Glow effect for focused inputs */
 input:focus, textarea:focus, select:focus {
   box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
@@ -85,6 +64,13 @@ input:focus, textarea:focus, select:focus {
   -ms-user-select: none;
   user-select: none;
 }
-option{
-  background:#0a0a0f;
+
+option {
+  background: #0a0a0f;
+}
+
+/* Optimización de rendimiento */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
