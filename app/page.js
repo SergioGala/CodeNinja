@@ -360,6 +360,7 @@ export default function Home() {
             {[
               {
                 name: 'SportBar League',
+                url: 'https://sample-service-name-2ppv.onrender.com/',
                 category: 'Web',
                 description: 'Web social de grupos y eventos abiertos.',
                 tech: ['React', 'Python', 'PostgreSQL'],
@@ -379,6 +380,7 @@ export default function Home() {
               },
               {
                 name: 'Futuro estudio',
+                url: 'https://web-dev-two-livid.vercel.app/',
                 category: 'web',
                 description: 'Futuro estudio del grupo.',
                 tech: ['React', 'Node.js', 'Tailwind'],
@@ -693,7 +695,7 @@ export default function Home() {
           </div>
 
           <div className="border-t border-cyan-500/10 pt-8 flex flex-col md:flex-row justify-center items-center gap-4">
-            <p className="text-gray-500 text-sm">© 2025 JEG Studios. Todos los derechos reservados.</p>
+            <p className="text-gray-500 text-sm">© 2024 JEG Studios. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>

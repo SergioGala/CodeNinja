@@ -6,7 +6,7 @@ export const metadata = {
     default: 'JEG Studios | Desarrollo Web y Apps Móviles | React, Python, Node.js',
     template: '%s | JEG Studios'
   },
-  description: 'Equipo de desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas. Consultoría gratuita. Proyectos web y móviles escalables con calidad garantizada.',
+  description: 'Equipo de 4 desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas. Consultoría gratuita. Proyectos web y móviles escalables con calidad garantizada.',
   keywords: ['desarrollo web', 'react', 'nextjs', 'python', 'nodejs', 'app móvil', 'desarrollo software', 'programadores freelance', 'MVP', 'JEG Studios', 'aplicaciones web', 'desarrollo frontend', 'desarrollo backend', 'API REST', 'React Native', 'desarrollo ágil', 'scrum', 'desarrollo software españa'],
   authors: [{ name: 'JEG Studios', url: 'https://jegsdev.com' }],
   creator: 'JEG Studios',
@@ -25,7 +25,7 @@ export const metadata = {
     url: 'https://jegsdev.com',
     siteName: 'JEG Studios',
     title: 'JEG Studios | Desarrollo Web y Apps Móviles Profesional',
-    description: 'Equipo de desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas con calidad asegurada.',
+    description: 'Equipo de 4 desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas con calidad asegurada.',
     images: [
       {
         url: '/og-image.jpg',
