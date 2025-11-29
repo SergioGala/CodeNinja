@@ -69,13 +69,19 @@ export const trackMetaPageView = () => {
 
 export const trackGoogleAdsConversion = (formData) => {
   if (typeof window !== 'undefined' && window.gtag) {
-    // IMPORTANTE: Reemplazar 'AW-XXXXXXXXX/XXXXXXXXXXX' con vuestro ID real
-    // cuando configuréis Google Ads
+    // Opción 1: Enviar a Google Ads directamente
     window.gtag('event', 'conversion', {
-      send_to: 'AW-XXXXXXXXX/XXXXXXXXXXX', // ← CAMBIAR cuando tengáis Google Ads
+      send_to: 'AW-1776522089',
       value: getBudgetValue(formData.budget),
       currency: 'EUR',
       transaction_id: generateTransactionId(),
+    });
+    
+    // Opción 2: También enviar como evento personalizado
+    window.gtag('event', 'lead_generated', {
+      value: getBudgetValue(formData.budget),
+      currency: 'EUR',
+      project_type: formData.projectType,
     });
   }
 };
