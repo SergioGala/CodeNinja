@@ -54,7 +54,7 @@ export const metadata = {
     description: 'Desarrollo web y apps móviles en Madrid. React, Next.js, Python. MVP en 4-6 semanas desde 3.000€.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: './Chip.webp',
         width: 1200,
         height: 630,
         alt: 'JEG Studios - Desarrollo Web y Apps Móviles Profesional en Madrid',
@@ -66,7 +66,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'JEG Studios | Desarrollo Web Madrid',
     description: 'Desarrollo web y apps móviles. React, Python, Node.js. MVP en 4-6 semanas.',
-    images: ['/og-image.jpg'],
+    images: ['./Chip.webp'],
   },
   robots: {
     index: true,
