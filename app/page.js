@@ -3,6 +3,7 @@
 import { useState, lazy, Suspense, useEffect } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { trackFormSubmit, trackCTAClick, trackScroll50, trackTimeOnSite, trackMetaLead, trackGoogleAdsConversion } from './lib/analytics'
 
 // Lazy load del logo (no es crítico para LCP)
@@ -310,82 +311,88 @@ export default function Home() {
       </section>
 
       {/* Services - SIMPLIFICADO */}
-      <section id="servicios" className="py-20 px-4 sm:px-6 lg:px-8 relative">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              Nuestros Servicios
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Tecnología moderna para proyectos que escalan
-            </p>
-          </div>
+   {/* Services - CON ENLACES A PÁGINAS ESPECÍFICAS */}
+<section id="servicios" className="py-20 px-4 sm:px-6 lg:px-8 relative">
+  <div className="max-w-7xl mx-auto relative z-10">
+    <div className="text-center mb-16">
+      <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+        Nuestros Servicios
+      </h2>
+      <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+        Tecnología moderna para proyectos que escalan
+      </p>
+    </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              {
-                title: 'Desarrollo Web',
-                techs: ['React', 'Next.js', 'Tailwind'],
-                time: '4-8 semanas',
-                price: 'Desde 3.000€',
-                description: 'Aplicaciones web modernas y SEO-optimizadas.',
-              },
-              {
-                title: 'Apps Móviles',
-                techs: ['React Native', 'iOS', 'Android'],
-                time: '6-12 semanas',
-                price: 'Desde 5.000€',
-                description: 'Apps nativas con una sola base de código.',
-              },
-              {
-                title: 'Backend & APIs',
-                techs: ['Python', 'Node.js', 'PostgreSQL'],
-                time: '3-6 semanas',
-                price: 'Desde 2.500€',
-                description: 'Arquitecturas escalables y seguras.',
-              },
-              {
-                title: 'Consultoría Técnica',
-                techs: ['Architecture', 'Code Review'],
-                time: 'Flexible',
-                price: 'Desde 1.000€',
-                description: 'Auditoría y optimización de código.',
-              }
-            ].map((service, index) => (
-              <div key={index} className="group relative">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition" />
-                <div className="relative bg-[#0f0f1a] rounded-2xl p-8 border border-cyan-500/10 h-full">
-                  <div className="inline-block px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold text-sm mb-4">
-                    {service.time}
-                  </div>
-                  <h3 className="font-display text-3xl font-bold text-white mb-3">{service.title}</h3>
-                  <p className="text-gray-400 mb-6">{service.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {service.techs.map((tech, i) => (
-                      <span key={i} className="px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-lg text-sm border border-cyan-500/20">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex justify-between items-center pt-6 border-t border-cyan-500/10">
-                    <span className="font-display text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                      {service.price}
-                    </span>
-                    {/* ✅ CTA SERVICIOS - TRACKING AÑADIDO */}
-                    <a 
-                      href="#contacto"
-                      onClick={() => trackCTAClick(`service_${service.title.toLowerCase().replace(/ /g, '_')}`)}
-                      className="text-cyan-400 font-semibold hover:text-purple-400 transition-colors"
-                    >
-                      Solicitar →
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
+    <div className="grid md:grid-cols-2 gap-8">
+      {[
+        {
+          title: 'Desarrollo Web',
+          techs: ['React', 'Next.js', 'Tailwind'],
+          time: '4-8 semanas',
+          price: 'Desde 3.000€',
+          description: 'Aplicaciones web modernas y SEO-optimizadas.',
+          link: '/desarrollo-web-react',  // ← NUEVO
+        },
+        {
+          title: 'Apps Móviles',
+          techs: ['React Native', 'iOS', 'Android'],
+          time: '6-12 semanas',
+          price: 'Desde 5.000€',
+          description: 'Apps nativas con una sola base de código.',
+          link: '/desarrollo-app-movil',  // ← NUEVO
+        },
+        {
+          title: 'Backend & APIs',
+          techs: ['Python', 'Node.js', 'PostgreSQL'],
+          time: '3-6 semanas',
+          price: 'Desde 2.500€',
+          description: 'Arquitecturas escalables y seguras.',
+          link: '/desarrollo-backend-python',  // ← NUEVO
+        },
+        {
+          title: 'Consultoría Técnica',
+          techs: ['Architecture', 'Code Review'],
+          time: 'Flexible',
+          price: 'Desde 1.000€',
+          description: 'Auditoría y optimización de código.',
+          link: '#contacto',  // ← Sin página específica
+        }
+      ].map((service, index) => (
+        <div key={index} className="group relative">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition" />
+          <div className="relative bg-[#0f0f1a] rounded-2xl p-8 border border-cyan-500/10 h-full">
+            <div className="inline-block px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold text-sm mb-4">
+              {service.time}
+            </div>
+            <h3 className="font-display text-3xl font-bold text-white mb-3">{service.title}</h3>
+            <p className="text-gray-400 mb-6">{service.description}</p>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {service.techs.map((tech, i) => (
+                <span key={i} className="px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-lg text-sm border border-cyan-500/20">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <div className="flex justify-between items-center pt-6 border-t border-cyan-500/10">
+              <span className="font-display text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                {service.price}
+              </span>
+              {/* ✅ ENLACE A PÁGINA ESPECÍFICA O CONTACTO */}
+              <Link 
+                href={service.link}
+                onClick={() => trackCTAClick(`service_${service.title.toLowerCase().replace(/ /g, '_')}`)}
+                className="text-cyan-400 font-semibold hover:text-purple-400 transition-colors inline-flex items-center gap-1"
+              >
+                {service.link.startsWith('#') ? 'Solicitar' : 'Más info'}
+                <span>→</span>
+              </Link>
+            </div>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Portfolio - OPTIMIZADO con priority en primera imagen */}
       <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8 relative">
@@ -646,39 +653,38 @@ export default function Home() {
               <p className="text-gray-400 mb-4">Desarrollo web y móvil profesional.</p>
             </div>
 
-            <div>
-              <h4 className="font-display font-bold mb-4 text-white">Servicios</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <a 
-                    href="#servicios"
-                    onClick={() => trackCTAClick('footer_servicios_web')}
-                    className="hover:text-cyan-400 transition-colors"
-                  >
-                    Desarrollo Web
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#servicios"
-                    onClick={() => trackCTAClick('footer_servicios_mobile')}
-                    className="hover:text-cyan-400 transition-colors"
-                  >
-                    Apps Móviles
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#servicios"
-                    onClick={() => trackCTAClick('footer_servicios_backend')}
-                    className="hover:text-cyan-400 transition-colors"
-                  >
-                    Backend & APIs
-                  </a>
-                </li>
-              </ul>
-            </div>
-
+           <div>
+  <h4 className="font-display font-bold mb-4 text-white">Servicios</h4>
+  <ul className="space-y-2 text-gray-400">
+    <li>
+      <Link  
+        href="/desarrollo-web-react" 
+        onClick={() => trackCTAClick('footer_servicios_web')}
+        className="hover:text-cyan-400 transition-colors"
+      >
+        Desarrollo Web React
+      </Link>
+    </li>
+    <li>
+      <Link  
+        href="/desarrollo-app-movil"  
+        onClick={() => trackCTAClick('footer_servicios_mobile')}
+        className="hover:text-cyan-400 transition-colors"
+      >
+        Apps Móviles React Native
+      </Link>
+    </li>
+    <li>
+      <Link  
+        href="/desarrollo-backend-python"  
+        onClick={() => trackCTAClick('footer_servicios_backend')}
+        className="hover:text-cyan-400 transition-colors"
+      >
+        Backend Python
+      </Link>
+    </li>
+  </ul>
+</div>
             <div>
               <h4 className="font-display font-bold mb-4 text-white">Empresa</h4>
               <ul className="space-y-2 text-gray-400">
