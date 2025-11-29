@@ -1,14 +1,39 @@
 import './globals.css'
 import Script from 'next/script'
+import StructuredData from './components/StructuredData'
 
 export const metadata = {
   metadataBase: new URL('https://jegsdev.com'),
   title: {
-    default: 'JEG Studios | Desarrollo Web y Apps Móviles | React, Python, Node.js',
+    default: 'JEG Studios | Desarrollo Web Madrid | React, Next.js, Python',
     template: '%s | JEG Studios'
   },
-  description: 'Equipo de desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas. Consultoría gratuita. Proyectos web y móviles escalables con calidad garantizada.',
-  keywords: ['desarrollo web', 'react', 'nextjs', 'python', 'nodejs', 'app móvil', 'desarrollo software', 'programadores freelance', 'MVP', 'JEG Studios'],
+  description: 'Desarrollo web y apps móviles en Madrid. Equipo especializado en React, Next.js, Python y Node.js. MVP en 4-6 semanas. Consultoría gratuita. Proyectos escalables desde 3.000€.',
+  keywords: [
+    // Keywords principales
+    'desarrollo web madrid',
+    'programadores react madrid',
+    'desarrollo app móvil madrid',
+    'empresa desarrollo software madrid',
+    
+    // Tecnologías
+    'react', 'nextjs', 'next.js', 'python', 'nodejs', 'node.js',
+    'react native', 'tailwind css', 'typescript',
+    
+    // Servicios
+    'desarrollo web', 'desarrollo móvil', 'desarrollo backend',
+    'desarrollo apis', 'mvp desarrollo', 'programadores freelance',
+    
+    // Long-tail
+    'crear página web empresa madrid',
+    'desarrollo web startup madrid',
+    'programadores python freelance',
+    'desarrollo react profesional',
+    'cuánto cuesta app móvil',
+    
+    // Local
+    'JEG Studios', 'desarrolladores madrid', 'software madrid'
+  ],
   authors: [{ name: 'JEG Studios', url: 'https://jegsdev.com' }],
   creator: 'JEG Studios',
   publisher: 'JEG Studios',
@@ -25,22 +50,22 @@ export const metadata = {
     locale: 'es_ES',
     url: 'https://jegsdev.com',
     siteName: 'JEG Studios',
-    title: 'JEG Studios | Desarrollo Web y Apps Móviles Profesional',
-    description: 'Equipo de desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas con calidad asegurada.',
+    title: 'JEG Studios | Desarrollo Web y Apps Móviles Madrid',
+    description: 'Desarrollo web y apps móviles en Madrid. React, Next.js, Python. MVP en 4-6 semanas desde 3.000€.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'JEG Studios - Desarrollo Web y Apps Móviles Profesional',
+        alt: 'JEG Studios - Desarrollo Web y Apps Móviles Profesional en Madrid',
         type: 'image/jpeg',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'JEG Studios | Desarrollo Web y Apps Móviles',
-    description: 'MVP en 4-6 semanas. React, Python, Node.js. Consultoría gratuita.',
+    title: 'JEG Studios | Desarrollo Web Madrid',
+    description: 'Desarrollo web y apps móviles. React, Python, Node.js. MVP en 4-6 semanas.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -62,15 +87,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <head>
-        {/* Preconnect CRÍTICO - debe ir primero */}
+        {/* Preconnect CRÍTICO */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Preload SOLO fuentes críticas con display=swap */}
+        {/* Fuentes críticas */}
         <link
           href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@700;800&display=swap"
           rel="stylesheet"
         />
+        
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
 
@@ -79,44 +105,49 @@ export default function RootLayout({ children }) {
 
         {/* Viewport optimizado */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+
+        {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=G-L048P21DHX`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-L048P21DHX', {
-      page_path: window.location.pathname,
-    });
-  `}
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-L048P21DHX', {
+              page_path: window.location.pathname,
+            });
+          `}
         </Script>
 
-
+        {/* Meta Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">
-  {`
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1187322646119344');
-    fbq('track', 'PageView');
-  `}
-</Script>
-<noscript>
-  <img
-    height="1"
-    width="1"
-    style={{ display: 'none' }}
-    src={`https://www.facebook.com/tr?id=1187322646119344&ev=PageView&noscript=1`}
-  />
-</noscript>
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1187322646119344');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src={`https://www.facebook.com/tr?id=1187322646119344&ev=PageView&noscript=1`}
+          />
+        </noscript>
+
+        {/* Structured Data (Schema.org) */}
+        <StructuredData />
       </head>
       <body className="antialiased">
         {children}
