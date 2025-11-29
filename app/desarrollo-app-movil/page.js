@@ -198,7 +198,7 @@ export default function DesarrolloAppMovil() {
 
       <footer className="border-t border-purple-500/10 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p>© 2024 JEG Studios - Desarrollo Apps Móviles Madrid</p>
+          <p>© 2025 JEG Studios - Desarrollo Apps Móviles Madrid</p>
           <p className="mt-2">
             <Link href="/" className="hover:text-purple-400 transition-colors">Inicio</Link>
             {' • '}

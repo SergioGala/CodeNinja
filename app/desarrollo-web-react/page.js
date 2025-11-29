@@ -302,7 +302,7 @@ export default function DesarrolloWebReact() {
       {/* Footer simple */}
       <footer className="border-t border-cyan-500/10 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p>© 2024 JEG Studios - Desarrollo Web React Madrid</p>
+          <p>© 2025 JEG Studios - Desarrollo Web React Madrid</p>
           <p className="mt-2">
             <Link href="/" className="hover:text-cyan-400 transition-colors">Inicio</Link>
             {' • '}
