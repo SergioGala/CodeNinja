@@ -64,26 +64,26 @@ export const trackMetaPageView = () => {
 };
 
 // ============================================
-// GOOGLE ADS CONVERSION TRACKING
+// GOOGLE ADS CONVERSION TRACKING (CLICK EVENT)
 // ============================================
 
-export const trackGoogleAdsConversion = (formData) => {
+export const trackGoogleAdsConversion = (formData, url) => {
   if (typeof window !== 'undefined' && window.gtag) {
-    // Opción 1: Enviar a Google Ads directamente
-    window.gtag('event', 'conversion', {
-      send_to: 'AW-1776522089',
-      value: getBudgetValue(formData.budget),
-      currency: 'EUR',
-      transaction_id: generateTransactionId(),
-    });
+    const callback = function () {
+      if (typeof(url) !== 'undefined') {
+        window.location = url;
+      }
+    };
     
-    // Opción 2: También enviar como evento personalizado
-    window.gtag('event', 'lead_generated', {
-      value: getBudgetValue(formData.budget),
-      currency: 'EUR',
-      project_type: formData.projectType,
+    window.gtag('event', 'conversion', {
+      'send_to': 'AW-1776522089/3iiYCJjO48obEOm53pc3',
+      'value': getBudgetValue(formData.budget),
+      'currency': 'EUR',
+      'transaction_id': generateTransactionId(),
+      'event_callback': callback
     });
   }
+  return false;
 };
 
 // ============================================
