@@ -45,7 +45,7 @@ export default function DesarrolloBackendPython() {
           </h1>
           
           <p className="text-xl text-gray-400 mb-8 leading-relaxed">
-            Arquitecturas backend escalables con <strong className="text-white">Python</strong>, <strong className="text-white">FastAPI</strong> y <strong className="text-white">PostgreSQL</strong>. 
+            Arquitecturas backend escalables con <strong className="text-white">Python</strong>, <strong className="text-white">Flask</strong>, <strong className="text-white">FastAPI</strong> y <strong className="text-white">PostgreSQL</strong>. 
             APIs REST, microservicios y cloud. Desde 2.500€.
           </p>
 
@@ -65,12 +65,12 @@ export default function DesarrolloBackendPython() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: 'Rápido de Desarrollar', description: 'Sintaxis clara. Menos código = menos bugs. MVP en semanas.', icon: '⚡' },
-              { title: 'Escalable', description: 'De startup a unicornio. Instagram, Spotify, Netflix usan Python.', icon: '📈' },
-              { title: 'Ecosistema Rico', description: 'Librerías para TODO. ML, Data, APIs, automation.', icon: '🔧' },
-              { title: 'Async Nativo', description: 'FastAPI es async por defecto. Miles de requests/segundo.', icon: '🚀' },
-              { title: 'Type Safety', description: 'Con Pydantic. Catch errors antes de deploy.', icon: '🛡️' },
-              { title: 'Comunidad', description: 'Stack Overflow enorme. Soluciones probadas.', icon: '👥' }
+              { title: 'Rápido de Desarrollar', description: 'Sintaxis clara. Menos código = menos bugs. MVP en semanas.' },
+              { title: 'Escalable', description: 'De startup a unicornio. Instagram, Spotify, Netflix usan Python.'},
+              { title: 'Ecosistema Rico', description: 'Librerías para TODO. ML, Data, APIs, automation.' },
+              { title: 'Async Nativo', description: 'FastAPI es async por defecto. Miles de requests/segundo.'},
+              { title: 'Type Safety', description: 'Con Pydantic. Catch errors antes de deploy.' },
+              { title: 'Comunidad', description: 'Stack Overflow enorme. Soluciones probadas.' }
             ].map((item, index) => (
               <div key={index} className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition" />
@@ -223,7 +223,7 @@ export default function DesarrolloBackendPython() {
 
       <footer className="border-t border-cyan-500/10 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p>© 2024 JEG Studios - Desarrollo Backend Python Madrid</p>
+          <p>© 2025 JEG Studios - Desarrollo Backend Python Madrid</p>
           <p className="mt-2">
             <Link href="/" className="hover:text-cyan-400 transition-colors">Inicio</Link>
             {' • '}
