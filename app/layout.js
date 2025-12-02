@@ -112,6 +112,10 @@ export default function RootLayout({ children }) {
         {/* Viewport optimizado */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 
+        {/* Google Search Console Verification */}
+        
+        <meta name="google-site-verification" content="cceT5qz9Ks-xYTeIuMmqSKNBK0y8Nj_idU3aGKMEi34" />
+        
         {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=G-L048P21DHX`}
