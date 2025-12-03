@@ -6,7 +6,7 @@ export default function StructuredData() {
     "@type": "Organization",
     "name": "JEG Studios",
     "legalName": "JEG Studios",
-    "url": "https://jegsdev.com",
+    "url": "https://jegsdev.com/Logo.webp",
     "logo": "./Logo.webp",
     "foundingDate": "2024",
     "founders": [
@@ -38,7 +38,7 @@ export default function StructuredData() {
     "@type": "LocalBusiness",
     "@id": "https://jegsdev.com",
     "name": "JEG Studios",
-    "image": "./Chip.webp",
+    "image": "https://jegsdev.com/Logo.webp",
     "description": "Equipo de desarrolladores especializados en React, Next.js, Python y Node.js. MVP en 4-6 semanas con calidad asegurada.",
     "address": {
       "@type": "PostalAddress",
