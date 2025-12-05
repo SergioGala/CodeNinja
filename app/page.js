@@ -6,21 +6,18 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { trackFormSubmit, trackCTAClick, trackScroll50, trackTimeOnSite, trackMetaLead, trackGoogleAdsConversion } from './lib/analytics'
 
-// Lazy load del logo (no es crítico para LCP)
 const JEGSLogo = dynamic(() => import('./components/JEGSLogo'), {
   loading: () => <div className="w-full aspect-square max-w-lg mx-auto bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-2xl animate-pulse" />,
   ssr: false
 })
 
 export default function Home() {
+  // ============================================
+  // FORMULARIO CORTO - 3 CAMPOS (OPTIMIZADO)
+  // ============================================
   const [formData, setFormData] = useState({
-    name: '',
-    company: '',
     email: '',
-    phone: '',
     projectType: '',
-    budget: '',
-    timeline: '',
     description: '',
     privacy: false,
   })
@@ -28,9 +25,6 @@ export default function Home() {
   const [formStatus, setFormStatus] = useState('')
   const [showStickyNav, setShowStickyNav] = useState(false)
 
-  // ============================================
-  // STICKY NAV AL HACER SCROLL
-  // ============================================
   useEffect(() => {
     const handleScroll = () => {
       setShowStickyNav(window.scrollY > 100)
@@ -39,12 +33,8 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // ============================================
-  // TRACKING DE SCROLL
-  // ============================================
   useEffect(() => {
     let scrollTracked = false;
-
     const handleScroll = () => {
       const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
       if (scrollPercent > 50 && !scrollTracked) {
@@ -52,22 +42,16 @@ export default function Home() {
         scrollTracked = true;
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ============================================
-  // TRACKING DE TIEMPO EN SITIO
-  // ============================================
   useEffect(() => {
     const startTime = Date.now();
     let tracked30s = false;
     let tracked60s = false;
-
     const timer = setInterval(() => {
       const timeOnSite = Math.floor((Date.now() - startTime) / 1000);
-      
       if (timeOnSite >= 30 && !tracked30s) {
         trackTimeOnSite(30);
         tracked30s = true;
@@ -76,7 +60,6 @@ export default function Home() {
         tracked60s = true;
       }
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
 
@@ -89,7 +72,7 @@ export default function Home() {
   }
 
   const validateForm = () => {
-    if (!formData.name || !formData.email || !formData.projectType || !formData.budget || !formData.description || !formData.privacy) {
+    if (!formData.email || !formData.projectType || !formData.description || !formData.privacy) {
       alert('⚠️ Por favor completa todos los campos obligatorios.')
       return false
     }
@@ -114,15 +97,10 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          nombre: formData.name,
-          empresa: formData.company || 'No especificada',
           email: formData.email,
-          telefono: formData.phone || 'No especificado',
           tipoProyecto: formData.projectType,
-          presupuesto: formData.budget,
-          timeline: formData.timeline || 'No especificado',
           descripcion: formData.description,
-          _subject: `🚀 Nuevo contacto: ${formData.name}${formData.company ? ` - ${formData.company}` : ''}`,
+          _subject: `🚀 Nuevo contacto: ${formData.email}`,
           _replyto: formData.email,
         }),
       })
@@ -130,19 +108,25 @@ export default function Home() {
       if (response.ok) {
         setFormStatus('success')
         
-        // ✅ TRACKING DE CONVERSIÓN
-        trackFormSubmit(formData)
-        trackMetaLead(formData)
-        trackGoogleAdsConversion(formData)
+        trackFormSubmit({
+          email: formData.email,
+          projectType: formData.projectType,
+          budget: '3000-6000',
+        })
+        trackMetaLead({
+          email: formData.email,
+          projectType: formData.projectType,
+          budget: '3000-6000',
+        })
+        trackGoogleAdsConversion({
+          email: formData.email,
+          projectType: formData.projectType,
+          budget: '3000-6000',
+        })
         
         setFormData({
-          name: '',
-          company: '',
           email: '',
-          phone: '',
           projectType: '',
-          budget: '',
-          timeline: '',
           description: '',
           privacy: false,
         })
@@ -160,14 +144,14 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#0a0a0f] text-white overflow-hidden">
-      {/* Background estático optimizado - solo CSS */}
+      {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px] opacity-30" />
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] opacity-30" />
       </div>
 
-      {/* Navigation - MEJORADO con CTA sticky */}
+      {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         showStickyNav 
           ? 'backdrop-blur-xl bg-[#0a0a0f]/95 border-b border-cyan-500/20 shadow-lg' 
@@ -191,7 +175,6 @@ export default function Home() {
               ))}
             </div>
 
-            {/* CTA NAV - MÁS PROMINENTE cuando sticky */}
             <a
               href="#contacto"
               onClick={() => trackCTAClick('nav_cta')}
@@ -207,7 +190,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section - SIN CAMBIOS (funciona bien) */}
+      {/* Hero */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -250,7 +233,6 @@ export default function Home() {
                 </a>
               </div>
 
-              {/* Stats */}
               <div className="grid grid-cols-3 gap-8 mt-12 pt-12 border-t border-cyan-500/10">
                 <div>
                   <div className="font-display text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">15+</div>
@@ -267,7 +249,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Logo con lazy loading */}
             <div className="relative hidden lg:block">
               <div className="relative w-full aspect-square max-w-lg mx-auto">
                 <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-2xl animate-pulse" />}>
@@ -280,16 +261,16 @@ export default function Home() {
       </section>
 
       {/* ============================================ */}
-      {/* FORMULARIO AQUÍ - SECCIÓN 2 (CRÍTICO) */}
+      {/* FORMULARIO CORTO - 3 CAMPOS (CRÍTICO) */}
       {/* ============================================ */}
       <section id="contacto" className="py-20 px-4 sm:px-6 lg:px-8 relative bg-[#0f0f1a]/50">
-        <div className="max-w-4xl mx-auto relative z-10">
+        <div className="max-w-3xl mx-auto relative z-10">
           <div className="text-center mb-12">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              Solicita tu Presupuesto
+              Presupuesto Gratis en 24h
             </h2>
             <p className="text-xl text-gray-400">
-              Respuesta en menos de 24 horas • Consultoría inicial gratuita
+              Cuéntanos tu proyecto. Te respondemos mañana.
             </p>
           </div>
 
@@ -297,129 +278,51 @@ export default function Home() {
             <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition" />
             <form onSubmit={handleSubmit} className="relative bg-[#0a0a0f] rounded-3xl p-8 md:p-12 border border-cyan-500/10">
               
-              {/* FORMULARIO COMPLETO Y PROFESIONAL */}
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">Nombre *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-black/30 border border-cyan-500/20 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-white placeholder-gray-500"
-                    placeholder="Tu nombre"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="company" className="block text-sm font-semibold text-gray-300 mb-2">Empresa</label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-black/30 border border-cyan-500/20 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-white placeholder-gray-500"
-                    placeholder="Nombre de tu empresa"
-                  />
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-2">Email *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-black/30 border border-cyan-500/20 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-white placeholder-gray-500"
-                    placeholder="tu@email.com"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-300 mb-2">Teléfono</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-black/30 border border-cyan-500/20 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-white placeholder-gray-500"
-                    placeholder="+34 600 000 000"
-                  />
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label htmlFor="projectType" className="block text-sm font-semibold text-gray-300 mb-2">Tipo de Proyecto *</label>
-                  <select
-                    id="projectType"
-                    name="projectType"
-                    required
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-black/30 border border-cyan-500/20 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-white"
-                  >
-                    <option value="">Selecciona...</option>
-                    <option value="web">Web Corporativa</option>
-                    <option value="ecommerce">E-commerce</option>
-                    <option value="app">App Móvil</option>
-                    <option value="backend">Backend/API</option>
-                    <option value="otro">Otro</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="budget" className="block text-sm font-semibold text-gray-300 mb-2">Presupuesto *</label>
-                  <select
-                    id="budget"
-                    name="budget"
-                    required
-                    value={formData.budget}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-black/30 border border-cyan-500/20 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-white"
-                  >
-                    <option value="">Selecciona...</option>
-                    <option value="<3000">Menos de 3.000€</option>
-                    <option value="3000-6000">3.000€ - 6.000€</option>
-                    <option value="6000-12000">6.000€ - 12.000€</option>
-                    <option value=">12000">Más de 12.000€</option>
-                  </select>
-                </div>
+              {/* SOLO 3 CAMPOS */}
+              <div className="mb-6">
+                <label htmlFor="email" className="block text-lg font-semibold text-white mb-3">Tu email *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-6 py-4 text-lg rounded-xl bg-black/40 border-2 border-cyan-500/30 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/20 outline-none transition-all text-white placeholder-gray-500"
+                  placeholder="tu@email.com"
+                />
               </div>
 
               <div className="mb-6">
-                <label htmlFor="timeline" className="block text-sm font-semibold text-gray-300 mb-2">Timeline</label>
+                <label htmlFor="projectType" className="block text-lg font-semibold text-white mb-3">¿Qué necesitas? *</label>
                 <select
-                  id="timeline"
-                  name="timeline"
-                  value={formData.timeline}
+                  id="projectType"
+                  name="projectType"
+                  required
+                  value={formData.projectType}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-cyan-500/20 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-white"
+                  className="w-full px-6 py-4 text-lg rounded-xl bg-black/40 border-2 border-cyan-500/30 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/20 outline-none transition-all text-white"
                 >
-                  <option value="">¿Cuándo necesitas el proyecto?</option>
-                  <option value="urgente">Lo antes posible</option>
-                  <option value="1-2meses">1-2 meses</option>
-                  <option value="3-6meses">3-6 meses</option>
-                  <option value="flexible">Flexible</option>
+                  <option value="">Selecciona...</option>
+                  <option value="web">Página Web</option>
+                  <option value="ecommerce">Tienda Online</option>
+                  <option value="app">App Móvil</option>
+                  <option value="backend">API / Backend</option>
+                  <option value="otro">Otro</option>
                 </select>
               </div>
 
               <div className="mb-6">
-                <label htmlFor="description" className="block text-sm font-semibold text-gray-300 mb-2">Cuéntanos sobre tu proyecto *</label>
+                <label htmlFor="description" className="block text-lg font-semibold text-white mb-3">Cuéntanos tu proyecto *</label>
                 <textarea
                   id="description"
                   name="description"
                   required
-                  rows={5}
+                  rows={4}
                   value={formData.description}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-cyan-500/20 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all resize-none text-white placeholder-gray-500"
-                  placeholder="Describe tu proyecto, objetivos, timeline..."
+                  className="w-full px-6 py-4 text-lg rounded-xl bg-black/40 border-2 border-cyan-500/30 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/20 outline-none transition-all resize-none text-white placeholder-gray-500"
+                  placeholder="Ej: Necesito una web para mi restaurante con reservas online..."
                 />
               </div>
 
@@ -434,7 +337,7 @@ export default function Home() {
                     className="mt-1 w-5 h-5 rounded border-cyan-500/30 bg-black/30 text-cyan-500 focus:ring-cyan-500"
                   />
                   <span className="text-sm text-gray-400">
-                    Acepto la política de privacidad y el tratamiento de mis datos *
+                    Acepto la política de privacidad *
                   </span>
                 </label>
               </div>
@@ -442,42 +345,37 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={formStatus === 'sending'}
-                className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg font-bold text-lg text-white hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg shadow-cyan-500/20"
+                className="w-full px-8 py-5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl font-bold text-xl text-white hover:opacity-90 transition-opacity disabled:opacity-50 shadow-2xl shadow-cyan-500/30"
               >
-                {formStatus === 'sending' ? 'Enviando...' : 'Solicitar Presupuesto Gratis'}
+                {formStatus === 'sending' ? 'Enviando...' : 'Recibir Presupuesto Gratis →'}
               </button>
 
               {formStatus === 'success' && (
-                <div className="mt-6 p-4 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400 text-center">
-                  ✓ ¡Mensaje enviado! Te responderemos en menos de 24 horas.
+                <div className="mt-6 p-6 bg-green-500/10 border-2 border-green-500/30 rounded-xl text-green-400 text-center text-lg font-semibold">
+                  ✓ ¡Listo! Te escribimos mañana con tu presupuesto.
                 </div>
               )}
 
               {formStatus === 'error' && (
-                <div className="mt-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-center">
-                  ⚠️ Error al enviar. Por favor, inténtalo de nuevo o escríbenos a jegstudiotech@gmail.com
+                <div className="mt-6 p-6 bg-red-500/10 border-2 border-red-500/30 rounded-xl text-red-400 text-center text-lg">
+                  ⚠️ Error. Escríbenos a: jegstudiotech@gmail.com
                 </div>
               )}
 
-              {/* Indicadores de confianza sutiles */}
-              <div className="mt-8 pt-8 border-t border-cyan-500/10 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-gray-500">
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>Respuesta en 24h</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>Consultoría inicial gratis</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>Sin compromiso</span>
+              <div className="mt-10 pt-10 border-t border-cyan-500/10">
+                <div className="grid grid-cols-3 gap-6 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-cyan-400 mb-1">24h</div>
+                    <div className="text-sm text-gray-500">Tiempo respuesta</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-purple-400 mb-1">50+</div>
+                    <div className="text-sm text-gray-500">Proyectos</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-cyan-400 mb-1">100%</div>
+                    <div className="text-sm text-gray-500">Gratis</div>
+                  </div>
                 </div>
               </div>
             </form>
@@ -532,7 +430,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* CTA después de 3B */}
           <div className="text-center mt-16">
             <a
               href="#contacto"
@@ -625,7 +522,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* CTA después de servicios */}
           <div className="text-center mt-16">
             <a
               href="#contacto"
@@ -717,7 +613,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* CTA después de portfolio */}
           <div className="text-center mt-16">
             <a
               href="#contacto"
@@ -758,7 +653,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* CTA después de proceso */}
           <div className="text-center mt-16">
             <a
               href="#contacto"
