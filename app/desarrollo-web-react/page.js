@@ -49,7 +49,7 @@ export default function DesarrolloWebReact() {
           
           <p className="text-xl text-gray-400 mb-8 leading-relaxed">
             Creamos aplicaciones web modernas, rápidas y escalables con <strong className="text-white">React</strong>, <strong className="text-white">Next.js</strong> y <strong className="text-white">Tailwind CSS</strong>. 
-            Entrega en 4-6 semanas desde 3.000€.
+            Entrega en 1-4 semanas desde 999€.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -228,14 +228,15 @@ export default function DesarrolloWebReact() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">Landing Page</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  3.000€
+                  €999
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
-                  <li>✓ 5-7 secciones</li>
-                  <li>✓ Responsive</li>
+                  <li>✓ Landing page React/Next.js</li>
+                  <li>✓ Responsive design</li>
                   <li>✓ SEO básico</li>
                   <li>✓ Formulario contacto</li>
-                  <li>✓ 2 semanas</li>
+                  <li>✓ 1 revisión</li>
+                  <li>✓ 1 semana</li>
                 </ul>
               </div>
             </div>
@@ -247,14 +248,17 @@ export default function DesarrolloWebReact() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">Web Completa</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  6.000€
+                   €1.999
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ Multi-página</li>
                   <li>✓ CMS integrado</li>
-                  <li>✓ Autenticación</li>
+                  {/* <li>✓ Autenticación</li> */}
                   <li>✓ Dashboard admin</li>
-                  <li>✓ 4-6 semanas</li>
+                  <li>✓ Google Analytics</li>
+                  {/* <li>✓ Tracking de eventos</li> */}
+                  <li>✓ 2 revisiones</li>
+                  <li>✓ 2-3 semanas</li>
                 </ul>
               </div>
             </div>
@@ -263,14 +267,17 @@ export default function DesarrolloWebReact() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">E-commerce</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  12.000€
+                 desde €2.499
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ Catálogo productos</li>
                   <li>✓ Carrito + Checkout</li>
-                  <li>✓ Stripe/PayPal</li>
+                  <li>✓ Pasarela De Pagos Stripe/PayPal</li>
                   <li>✓ Panel vendedor</li>
-                  <li>✓ 8-12 semanas</li>
+                  <li>✓ Panel admin básico</li>
+                  <li>✓ Manual de Usuario</li>
+                  <li>✓ 2 revisiones</li>
+                  <li>✓ 4-6 semanas</li>
                 </ul>
               </div>
             </div>

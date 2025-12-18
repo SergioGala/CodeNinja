@@ -107,22 +107,33 @@ export default function Home() {
 
       if (response.ok) {
         setFormStatus('success')
+{/*HARCODEO: A IMPLEMENTAR:
+  SE HA IMPLEMENTADO UNA SOLUCION ELIMINANDO DATOS HARCODEADO QUE RETORNAN SIEMPRE 
+  EL MISMO VALOR 4500 EN OBSERVACION POR SI FUNCIONA ESTA IMPLEMENTACION... */}        
+        //
+        // trackFormSubmit({
+        //   email: formData.email,
+        //   projectType: formData.projectType,
+        //   budget: '3000-6000',
+        // })
+        // trackMetaLead({
+        //   email: formData.email,
+        //   projectType: formData.projectType,
+        //   budget: '3000-6000',
+        // })
+        // trackGoogleAdsConversion({
+        //   email: formData.email,
+        //   projectType: formData.projectType,
+        //   budget: '3000-6000',
+        // })
         
-        trackFormSubmit({
-          email: formData.email,
-          projectType: formData.projectType,
-          budget: '3000-6000',
-        })
-        trackMetaLead({
-          email: formData.email,
-          projectType: formData.projectType,
-          budget: '3000-6000',
-        })
-        trackGoogleAdsConversion({
-          email: formData.email,
-          projectType: formData.projectType,
-          budget: '3000-6000',
-        })
+  //  POSIBLE SOLUCION IMPLEMENTADA Pasar formData completo (sin budget hardcodeado)
+      trackFormSubmit(formData);
+      trackMetaLead(formData);
+      trackGoogleAdsConversion(formData);
+
+      console.log('📊 Formulario enviado y conversiones trackeadas');
+
         
         setFormData({
           email: '',
@@ -212,7 +223,7 @@ export default function Home() {
 
               <p className="text-xl text-gray-400 mb-8 leading-relaxed">
                 Equipo de desarrolladores senior especializados en <span className="text-cyan-400 font-semibold">React</span>, <span className="text-purple-400 font-semibold">Python</span> y <span className="text-cyan-400 font-semibold">Node.js</span>.
-                <br />Lanzamos tu MVP en 4-6 semanas con calidad asegurada.
+                <br />Lanzamos tu MVP en 1-6 semanas con calidad asegurada.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -459,33 +470,40 @@ export default function Home() {
               {
                 title: 'Desarrollo Web',
                 techs: ['React', 'Next.js', 'Tailwind'],
-                time: '4-8 semanas',
-                price: 'Desde 3.000€',
+                // time: '4-8 semanas',
+                time: '1-4 semanas',
+                // price: 'Desde 3.000€',
+                price: 'Desde 999€',
                 description: 'Aplicaciones web modernas y SEO-optimizadas.',
                 link: '/desarrollo-web-react',
               },
               {
                 title: 'Apps Móviles',
                 techs: ['React Native', 'iOS', 'Android'],
-                time: '6-12 semanas',
-                price: 'Desde 5.000€',
+                // time: '6-12 semanas', bajado el tiempo de entrega 
+                time: '4-12 semanas',
+                // price: 'Desde 5.000€',
+                price: 'Desde 2.999€',
                 description: 'Apps nativas con una sola base de código.',
                 link: '/desarrollo-app-movil',
               },
               {
                 title: 'Backend & APIs',
                 techs: ['Python', 'Node.js', 'PostgreSQL'],
-                time: '3-6 semanas',
-                price: 'Desde 2.500€',
+                // time: '3-6 semanas', baje el tiempo de entrega
+                time: '1-6 semanas',
+                // price: 'Desde 2.500€',
+                price: 'Desde 799€',
                 description: 'Arquitecturas escalables y seguras.',
                 link: '/desarrollo-backend-python',
               },
               {
                 title: 'Consultoría Técnica',
-                techs: ['Architecture', 'Code Review'],
+                techs: ['Architecture', 'Code Review', 'Other Services'],
                 time: 'Flexible',
-                price: 'Desde 1.000€',
-                description: 'Auditoría y optimización de código.',
+                // price: 'Desde 1.000€',
+                price: 'Desde 499€',
+                description: 'Auditoría optimización de código y otros servicios.',
                 link: '#contacto',
               }
             ].map((service, index) => (
@@ -534,7 +552,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* También Ofrecemos NUEVA SECCIÓN*/}
+      
+<section className="py-12 px-4 sm:px-6 lg:px-8 bg-[#0a0a0f]">
+  <div className="max-w-7xl mx-auto">
+    <h3 className="font-display text-2xl font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-8">
+      También Ofrecemos
+    </h3>
+    
+    <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+      {[
+        { icon: '🔍', title: 'SEO', desc: 'Posicionamiento web' },
+        { icon: '📊', title: 'Marketing Digital', desc: 'Google & Meta Ads' },
+        { icon: '🔒', title: 'Software Privado', desc: 'Soluciones empresariales' },
+        { icon: '⚙️', title: 'DevOps', desc: 'CI/CD & Cloud' }
+      ].map((service, i) => (
+        <div key={i} className="text-center group cursor-pointer">
+          <div className="w-16 h-16 mx-auto mb-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <span className="text-3xl">{service.icon}</span>
+          </div>
+          <h4 className="font-semibold text-white mb-2">{service.title}</h4>
+          <p className="text-sm text-gray-400">{service.desc}</p>
+        </div>
+      ))}
+    </div>
+    
+    <div className="text-center mt-8">
+      <a
+        href="#contacto"
+        onClick={() => trackCTAClick('otros_servicios')}
+        className="inline-flex items-center px-6 py-3 border border-cyan-500/30 rounded-lg text-cyan-400 hover:bg-cyan-500/10 transition-colors font-semibold"
+      >
+        Consultar servicios adicionales
+      </a>
+    </div>
+  </div>
+</section> 
+
       {/* Portfolio */}
+
       <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">

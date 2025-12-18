@@ -48,7 +48,7 @@ export default function DesarrolloAppMovil() {
           <p className="text-xl text-gray-400 mb-8 leading-relaxed">
             Creamos aplicaciones móviles nativas con <strong className="text-white">React Native</strong>. 
             Un solo código para <strong className="text-white">iOS</strong> y <strong className="text-white">Android</strong>. 
-            Entrega en 6-12 semanas desde 5.000€.
+            Entrega en 4-12 semanas desde 2.999€.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -125,14 +125,16 @@ export default function DesarrolloAppMovil() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">App Básica</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  5.000€
+                  2.999€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
-                  <li>✓ 5-7 pantallas</li>
+                  <li>✓ 3-5 pantallas</li>
                   <li>✓ iOS + Android</li>
                   <li>✓ Backend básico</li>
                   <li>✓ Auth usuarios</li>
-                  <li>✓ 6-8 semanas</li>
+                  <li>✓ 1 mes soporte</li>
+                  <li>✓ 4-8 semanas</li>
+                  <li>✓ Documentation</li>
                 </ul>
               </div>
             </div>
@@ -144,14 +146,18 @@ export default function DesarrolloAppMovil() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">App Completa</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  10.000€
+                  5.999€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ 10-15 pantallas</li>
                   <li>✓ API completa</li>
                   <li>✓ Push notifications</li>
+                  <li>✓ Integraciones API</li>
+                  <li>✓ Google Analytics Base</li>
+                  <li>✓ 1 mes soporte</li>
                   <li>✓ Pagos integrados</li>
-                  <li>✓ 8-12 semanas</li>
+                  <li>✓ Documentation</li>
+                  <li>✓ 6-12 semanas</li>
                 </ul>
               </div>
             </div>
@@ -160,14 +166,20 @@ export default function DesarrolloAppMovil() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">App Compleja</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  +15.000€
+                  +12.999€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
-                  <li>✓ Social features</li>
+                  <li>✓ Social features complejas</li>
+                  <li>✓ Backend incluido</li>
                   <li>✓ Tiempo real</li>
                   <li>✓ Geolocalización</li>
                   <li>✓ Admin dashboard</li>
-                  <li>✓ 12+ semanas</li>
+                  <li>✓ Google Analytics</li>
+                  <li>✓ Traking de eventos</li>
+                  <li>✓ Pagos in-app</li>
+                  <li>✓ 2 meses soporte</li>
+                  <li>✓ Documentation</li>
+                  <li>✓ 8-12+ semanas</li>
                 </ul>
               </div>
             </div>

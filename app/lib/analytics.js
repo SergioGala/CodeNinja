@@ -11,13 +11,28 @@ export const trackEvent = (eventName, eventParams = {}) => {
   }
 };
 
-// Evento: Envío de formulario
+// ============================================
+// EVENTO: Envío de formulario (MODIFICADO)
+// ============================================
+
 export const trackFormSubmit = (formData) => {
+
+  const estimatedValue = getProjectValue(formData.projectType);
+
   trackEvent('form_submit', {
     project_type: formData.projectType,
     budget: formData.budget,
-    value: getBudgetValue(formData.budget),
+    // value: getBudgetValue(formData.budget), comentado en fase de observacion
+    value: estimatedValue,
     currency: 'EUR',
+  });
+
+    // Log para debugging
+
+  console.log(' GA4 Conversión trackeada:', {
+    event: 'form_submit',
+    project_type: formData.projectType,
+    value: estimatedValue
   });
 };
 
@@ -43,16 +58,25 @@ export const trackTimeOnSite = (seconds) => {
 };
 
 // ============================================
-// META PIXEL (Facebook/Instagram Ads)
+// META PIXEL (Facebook/Instagram Ads) - MODIFICADO
 // ============================================
 
 export const trackMetaLead = (formData) => {
   if (typeof window !== 'undefined' && window.fbq) {
+
+    const value = getProjectValue(formData.projectType);
+
     window.fbq('track', 'Lead', {
       content_name: 'Contact Form',
       content_category: formData.projectType,
-      value: getBudgetValue(formData.budget),
+      // value: getBudgetValue(formData.budget),
+      value: value,
       currency: 'EUR',
+    });
+      
+    console.log('Meta Pixel Lead trackeado:', {
+      content_category: formData.projectType,
+      value: value
     });
   }
 };
@@ -64,23 +88,33 @@ export const trackMetaPageView = () => {
 };
 
 // ============================================
-// GOOGLE ADS CONVERSION TRACKING (CLICK EVENT)
+// GOOGLE ADS CONVERSION TRACKING - MODIFICADO
 // ============================================
 
 export const trackGoogleAdsConversion = (formData, url) => {
   if (typeof window !== 'undefined' && window.gtag) {
+
+    const value = getProjectValue(formData.projectType);
+    const transactionId = generateTransactionId();
     const callback = function () {
       if (typeof(url) !== 'undefined') {
         window.location = url;
       }
     };
-    
+
+        // Conversion ID cuenta Google Ads
+
     window.gtag('event', 'conversion', {
       'send_to': 'AW-1776522089/3iiYCJjO48obEOm53pc3',
-      'value': getBudgetValue(formData.budget),
+      'value': value,
       'currency': 'EUR',
-      'transaction_id': generateTransactionId(),
+      'transaction_id': transactionId,
       'event_callback': callback
+    });
+      console.log(' Google Ads Conversión trackeada:', {
+      value: value,
+      transaction_id: transactionId,
+      project_type: formData.projectType
     });
   }
   return false;
@@ -91,17 +125,33 @@ export const trackGoogleAdsConversion = (formData, url) => {
 // ============================================
 
 // Convertir rango de presupuesto a valor numérico
-const getBudgetValue = (budget) => {
-  const budgetMap = {
-    '<3000': 2000,
-    '3000-6000': 4500,
-    '6000-12000': 9000,
-    '>12000': 15000,
+
+// const getBudgetValue = (budget) => {
+//   const budgetMap = {
+//     '<3000': 2000,
+//     '3000-6000': 4500,
+//     '6000-12000': 9000,
+//     '>12000': 15000,
+//   };
+//   return budgetMap[budget] || 0;
+// };
+
+const getProjectValue = (projectType) => {
+  const projectValues = {
+    'web': 1500, // Landing/web básica Promedio real: €999-1,999
+    'ecommerce': 3500, // Tienda online básica Promedio real: €2,499-4,999
+    'app': 4000, // MVP app móvil Promedio real:  real: €2,999-5,999
+    'backend': 1200, // Backend/API más económico promedio real: €799-1,999
+    'otro': 2000, // Otros proyectos promedio: Promedio general
   };
-  return budgetMap[budget] || 0;
+
+ // Devolver valor según tipo, o 2000 por defecto
+
+  return projectValues[projectType] || 2000;
 };
 
 // Generar ID único para transacción
+
 const generateTransactionId = () => {
   return `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 };

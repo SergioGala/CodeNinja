@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Desarrollo Backend Python Madrid | FastAPI, Django | JEG Studios',
-  description: 'Desarrollo backend profesional con Python y FastAPI en Madrid. APIs REST escalables, microservicios y arquitecturas cloud. Desde 2.500€.',
+  description: 'Desarrollo backend profesional con Python Flask y FastAPI en Madrid. APIs REST escalables, microservicios y arquitecturas cloud. Desde 799€.',
   keywords: [
     'desarrollo backend python madrid',
     'programadores python madrid',
@@ -13,7 +13,7 @@ export const metadata = {
   ],
   openGraph: {
     title: 'Desarrollo Backend Python Madrid | JEG Studios',
-    description: 'Backend profesional con Python y FastAPI. APIs escalables desde 2.500€.',
+    description: 'Backend profesional con Python Flask y FastAPI. APIs escalables desde 799€.',
     url: 'https://jegsdev.com/desarrollo-backend-python',
   },
 }
@@ -46,7 +46,7 @@ export default function DesarrolloBackendPython() {
           
           <p className="text-xl text-gray-400 mb-8 leading-relaxed">
             Arquitecturas backend escalables con <strong className="text-white">Python</strong>, <strong className="text-white">Flask</strong>, <strong className="text-white">FastAPI</strong> y <strong className="text-white">PostgreSQL</strong>. 
-            APIs REST, microservicios y cloud. Desde 2.500€.
+            APIs REST, microservicios y cloud. Desde 799€.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -150,14 +150,15 @@ export default function DesarrolloBackendPython() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">API Básica</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  2.500€
+                  799€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ CRUD completo</li>
+                  <li>✓ API REST</li>
                   <li>✓ Autenticación JWT</li>
                   <li>✓ PostgreSQL</li>
                   <li>✓ Documentación</li>
-                  <li>✓ 3-4 semanas</li>
+                  <li>✓ 1-4 semanas</li>
                 </ul>
               </div>
             </div>
@@ -169,14 +170,17 @@ export default function DesarrolloBackendPython() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">API Completa</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  5.000€
+                  1.999€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ Multi-endpoints</li>
-                  <li>✓ Websockets</li>
+                  <li>✓ Base de datos diseñada</li>
+                  {/* <li>✓ Websockets</li> DE MOMENTO SOLO CACHE REDIS*/} 
+                  <li>✓ API REST</li>
+                  <li>✓ Deploy incluido</li>
                   <li>✓ Cache Redis</li>
                   <li>✓ Testing completo</li>
-                  <li>✓ 4-6 semanas</li>
+                  <li>✓ 2-6 semanas</li>
                 </ul>
               </div>
             </div>
@@ -185,14 +189,17 @@ export default function DesarrolloBackendPython() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">Microservicios</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  +10.000€
+                  +4.999€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ Arquitectura distribuida</li>
                   <li>✓ Message queues</li>
+                  <li>✓ Microservicios</li>
                   <li>✓ Monitoring</li>
+                  <li>✓ Websockets</li>
+                  <li>✓ Cache Redis</li>
                   <li>✓ CI/CD</li>
-                  <li>✓ 8+ semanas</li>
+                  <li>✓ 4-8+ semanas</li>
                 </ul>
               </div>
             </div>
