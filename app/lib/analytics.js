@@ -1,126 +1,66 @@
 // app/lib/analytics.js
-// Utilidades para tracking de eventos en GA4 y Meta Pixel
+// Tracking FULL GTM vía dataLayer
 
-// ============================================
-// GOOGLE ANALYTICS 4 EVENTS
-// ============================================
+const pushToDataLayer = (payload) => {
+  if (typeof window === 'undefined') return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(payload);
+};
 
 export const trackEvent = (eventName, eventParams = {}) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, eventParams);
-  }
+  pushToDataLayer({
+    event: eventName,
+    ...eventParams,
+  });
 };
 
-// ============================================
-// EVENTO: Envío de formulario (MODIFICADO)
-// ============================================
+// =============================
+// EVENTS QUE USA GTM
+// =============================
 
-export const trackFormSubmit = (formData) => {
+// Lead (submit real)
 
-  const estimatedValue = getProjectValue(formData.projectType);
+export const trackLeadFormSubmit = (formData) => {
+  const projectType = formData?.projectType || 'otro';
+  const value = Number(getProjectValue(projectType)) || 0;
 
-  trackEvent('form_submit', {
-    project_type: formData.projectType,
-    budget: formData.budget,
-    // value: getBudgetValue(formData.budget), comentado en fase de observacion
-    value: estimatedValue,
+  trackEvent('lead_form_submit', {
+    email: formData?.email || '',
+    project_type: projectType,
+    value,                 // viene del helper
     currency: 'EUR',
-  });
-
-    // Log para debugging
-
-  console.log(' GA4 Conversión trackeada:', {
-    event: 'form_submit',
-    project_type: formData.projectType,
-    value: estimatedValue
+    transaction_id: generateTransactionId(),
   });
 };
 
-// Evento: Click en CTA
+// CTA click
 export const trackCTAClick = (ctaLocation) => {
   trackEvent('cta_click', {
-    location: ctaLocation,
+    location: ctaLocation || '',
   });
 };
 
-// Evento: Scroll 50%
+// Scroll 50%
 export const trackScroll50 = () => {
+  // dedupe: dispara 1 vez por sesión
+  if (typeof window !== 'undefined') {
+    if (window.__tracked_scroll_50) return;
+    window.__tracked_scroll_50 = true;
+  }
+
   trackEvent('scroll_50_percent', {
-    engagement_time_msec: Date.now(),
+    scroll_threshold: 50,
   });
 };
 
-// Evento: Tiempo en sitio
+// Time on site (ej: 15, 30, 45... segundos)
 export const trackTimeOnSite = (seconds) => {
   trackEvent('time_on_site', {
-    time_seconds: seconds,
+    time_seconds: Number(seconds) || 0,
   });
 };
 
-// ============================================
-// META PIXEL (Facebook/Instagram Ads) - MODIFICADO
-// ============================================
-
-export const trackMetaLead = (formData) => {
-  if (typeof window !== 'undefined' && window.fbq) {
-
-    const value = getProjectValue(formData.projectType);
-
-    window.fbq('track', 'Lead', {
-      content_name: 'Contact Form',
-      content_category: formData.projectType,
-      // value: getBudgetValue(formData.budget),
-      value: value,
-      currency: 'EUR',
-    });
-      
-    console.log('Meta Pixel Lead trackeado:', {
-      content_category: formData.projectType,
-      value: value
-    });
-  }
-};
-
-export const trackMetaPageView = () => {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', 'PageView');
-  }
-};
-
-// ============================================
-// GOOGLE ADS CONVERSION TRACKING - MODIFICADO
-// ============================================
-
-export const trackGoogleAdsConversion = (formData, url) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-
-    const value = getProjectValue(formData.projectType);
-    const transactionId = generateTransactionId();
-    const callback = function () {
-      if (typeof(url) !== 'undefined') {
-        window.location = url;
-      }
-    };
-
-        // Conversion ID cuenta Google Ads
-
-    window.gtag('event', 'conversion', {
-      'send_to': 'AW-1776522089/3iiYCJjO48obEOm53pc3',
-      'value': value,
-      'currency': 'EUR',
-      'transaction_id': transactionId,
-      'event_callback': callback
-    });
-      console.log(' Google Ads Conversión trackeada:', {
-      value: value,
-      transaction_id: transactionId,
-      project_type: formData.projectType
-    });
-  }
-  return false;
-};
-
-// ============================================
+// =============================
 // HELPERS
 // ============================================
 
@@ -136,7 +76,7 @@ export const trackGoogleAdsConversion = (formData, url) => {
 //   return budgetMap[budget] || 0;
 // };
 
-const getProjectValue = (projectType) => {
+export const getProjectValue = (projectType) => {
   const projectValues = {
     'web': 1500, // Landing/web básica Promedio real: €999-1,999
     'ecommerce': 3500, // Tienda online básica Promedio real: €2,499-4,999
@@ -148,20 +88,16 @@ const getProjectValue = (projectType) => {
  // Devolver valor según tipo, o 2000 por defecto
 
   return projectValues[projectType] || 2000;
-};
-
-// Generar ID único para transacción
+}
 
 const generateTransactionId = () => {
-  return `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  return `lead_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
 };
 
-// ============================================
-// DEBUGGING (solo desarrollo)
-// ============================================
-
+// DEBUG (solo dev)
 export const debugTracking = (eventName, data) => {
   if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
     console.log('📊 Tracking Event:', eventName, data);
   }
 };
