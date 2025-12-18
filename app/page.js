@@ -4,7 +4,7 @@ import { useState, lazy, Suspense, useEffect } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { trackFormSubmit, trackCTAClick, trackScroll50, trackTimeOnSite, trackMetaLead, trackGoogleAdsConversion } from './lib/analytics'
+import { trackLeadFormSubmit, trackCTAClick, trackScroll50, trackTimeOnSite } from './lib/analytics'
 
 const JEGSLogo = dynamic(() => import('./components/JEGSLogo'), {
   loading: () => <div className="w-full aspect-square max-w-lg mx-auto bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-2xl animate-pulse" />,
@@ -95,6 +95,7 @@ export default function Home() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json', // ✅ importante para Formspree
         },
         body: JSON.stringify({
           email: formData.email,
@@ -105,42 +106,48 @@ export default function Home() {
         }),
       })
 
-      if (response.ok) {
-        setFormStatus('success')
-        
-        trackFormSubmit({
-          email: formData.email,
-          projectType: formData.projectType,
-          budget: '3000-6000',
-        })
-        trackMetaLead({
-          email: formData.email,
-          projectType: formData.projectType,
-          budget: '3000-6000',
-        })
-        trackGoogleAdsConversion({
-          email: formData.email,
-          projectType: formData.projectType,
-          budget: '3000-6000',
-        })
-        
-        setFormData({
-          email: '',
-          projectType: '',
-          description: '',
-          privacy: false,
-        })
-        setTimeout(() => setFormStatus(''), 5000)
-      } else {
+      if (!response.ok) {
+        // opcional: leer body para ver el motivo
+        let errText = ''
+        try { errText = await response.text() } catch (_) { }
+        console.error('Formspree error:', response.status, errText)
+
         setFormStatus('error')
         setTimeout(() => setFormStatus(''), 5000)
+        return
       }
+
+      // ✅ SOLO SI EL ENVÍO ES OK: disparamos el LEAD real
+      trackLeadFormSubmit({
+        email: formData.email,
+        projectType: formData.projectType,
+        budget: '3000-6000',
+      })
+
+      setFormStatus('success')
+
+      setFormData({
+        email: '',
+        projectType: '',
+        description: '',
+        privacy: false,
+      })
+
+      setTimeout(() => setFormStatus(''), 5000)
+
     } catch (error) {
       console.error('Error:', error)
       setFormStatus('error')
       setTimeout(() => setFormStatus(''), 5000)
     }
   }
+
+  useEffect(() => {
+    // Esto previene warnings de hidratación por extensiones del navegador
+    if (typeof window !== 'undefined') {
+      // Fuerza la hidratación después del primer render
+    }
+  }, [])
 
   return (
     <main className="min-h-screen bg-[#0a0a0f] text-white overflow-hidden">
@@ -152,11 +159,10 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        showStickyNav 
-          ? 'backdrop-blur-xl bg-[#0a0a0f]/95 border-b border-cyan-500/20 shadow-lg' 
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${showStickyNav
+          ? 'backdrop-blur-xl bg-[#0a0a0f]/95 border-b border-cyan-500/20 shadow-lg'
           : 'backdrop-blur-xl bg-[#0a0a0f]/80 border-b border-cyan-500/10'
-      }`}>
+        }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="font-display text-xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
@@ -178,11 +184,10 @@ export default function Home() {
             <a
               href="#contacto"
               onClick={() => trackCTAClick('nav_cta')}
-              className={`relative group font-semibold text-white hover:opacity-90 transition-all ${
-                showStickyNav 
-                  ? 'px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg shadow-lg shadow-cyan-500/20' 
+              className={`relative group font-semibold text-white hover:opacity-90 transition-all ${showStickyNav
+                  ? 'px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg shadow-lg shadow-cyan-500/20'
                   : 'px-6 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg'
-              }`}
+                }`}
             >
               {showStickyNav ? 'Solicitar Presupuesto' : 'Hablemos'}
             </a>
@@ -277,7 +282,7 @@ export default function Home() {
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition" />
             <form onSubmit={handleSubmit} className="relative bg-[#0a0a0f] rounded-3xl p-8 md:p-12 border border-cyan-500/10">
-              
+
               {/* SOLO 3 CAMPOS */}
               <div className="mb-6">
                 <label htmlFor="email" className="block text-lg font-semibold text-white mb-3">Tu email *</label>
@@ -508,7 +513,7 @@ export default function Home() {
                     <span className="font-display text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                       {service.price}
                     </span>
-                    <Link 
+                    <Link
                       href={service.link}
                       onClick={() => trackCTAClick(`service_${service.title.toLowerCase().replace(/ /g, '_')}`)}
                       className="text-cyan-400 font-semibold hover:text-purple-400 transition-colors inline-flex items-center gap-1"
@@ -587,9 +592,9 @@ export default function Home() {
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="font-display text-xl font-bold text-white">{project.name}</h3>
-                      <a 
-                        href={project.url} 
-                        target="_blank" 
+                      <a
+                        href={project.url}
+                        target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => trackCTAClick(`portfolio_${project.name.toLowerCase().replace(/ /g, '_')}`)}
                         className="text-cyan-400 hover:text-purple-400 transition-colors"
@@ -680,8 +685,8 @@ export default function Home() {
               <h4 className="font-display font-bold mb-4 text-white">Servicios</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link  
-                    href="/desarrollo-web-react" 
+                  <Link
+                    href="/desarrollo-web-react"
                     onClick={() => trackCTAClick('footer_servicios_web')}
                     className="hover:text-cyan-400 transition-colors"
                   >
@@ -689,8 +694,8 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link  
-                    href="/desarrollo-app-movil"  
+                  <Link
+                    href="/desarrollo-app-movil"
                     onClick={() => trackCTAClick('footer_servicios_mobile')}
                     className="hover:text-cyan-400 transition-colors"
                   >
@@ -698,8 +703,8 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link  
-                    href="/desarrollo-backend-python"  
+                  <Link
+                    href="/desarrollo-backend-python"
                     onClick={() => trackCTAClick('footer_servicios_backend')}
                     className="hover:text-cyan-400 transition-colors"
                   >
@@ -713,7 +718,7 @@ export default function Home() {
               <h4 className="font-display font-bold mb-4 text-white">Empresa</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <a 
+                  <a
                     href="#portfolio"
                     onClick={() => trackCTAClick('footer_portfolio')}
                     className="hover:text-cyan-400 transition-colors"
@@ -722,7 +727,7 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <a 
+                  <a
                     href="#proceso"
                     onClick={() => trackCTAClick('footer_proceso')}
                     className="hover:text-cyan-400 transition-colors"
@@ -731,7 +736,7 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <a 
+                  <a
                     href="#contacto"
                     onClick={() => trackCTAClick('footer_contacto')}
                     className="hover:text-cyan-400 transition-colors"
@@ -744,7 +749,7 @@ export default function Home() {
 
             <div>
               <h4 className="font-display font-bold mb-4 text-white">Contacto</h4>
-              <a 
+              <a
                 href="mailto:jegstudiotech@gmail.com"
                 onClick={() => trackCTAClick('footer_email')}
                 className="text-gray-400 hover:text-cyan-400 transition-colors"

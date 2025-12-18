@@ -1,96 +1,64 @@
 // app/lib/analytics.js
-// Utilidades para tracking de eventos en GA4 y Meta Pixel
+// Tracking FULL GTM vía dataLayer
 
-// ============================================
-// GOOGLE ANALYTICS 4 EVENTS
-// ============================================
+const pushToDataLayer = (payload) => {
+  if (typeof window === 'undefined') return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(payload);
+};
 
 export const trackEvent = (eventName, eventParams = {}) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, eventParams);
-  }
-};
-
-// Evento: Envío de formulario
-export const trackFormSubmit = (formData) => {
-  trackEvent('form_submit', {
-    project_type: formData.projectType,
-    budget: formData.budget,
-    value: getBudgetValue(formData.budget),
-    currency: 'EUR',
+  pushToDataLayer({
+    event: eventName,
+    ...eventParams,
   });
 };
 
-// Evento: Click en CTA
+// =============================
+// EVENTS QUE USA GTM
+// =============================
+
+// Lead (submit real)
+export const trackLeadFormSubmit = (formData) => {
+  trackEvent('lead_form_submit', {
+    project_type: formData?.projectType || '',
+    budget: formData?.budget || '',
+    value: getBudgetValue(formData?.budget),
+    currency: 'EUR',
+    transaction_id: generateTransactionId(),
+  });
+};
+
+// CTA click
 export const trackCTAClick = (ctaLocation) => {
   trackEvent('cta_click', {
-    location: ctaLocation,
+    location: ctaLocation || '',
   });
 };
 
-// Evento: Scroll 50%
+// Scroll 50%
 export const trackScroll50 = () => {
+  // dedupe: dispara 1 vez por sesión
+  if (typeof window !== 'undefined') {
+    if (window.__tracked_scroll_50) return;
+    window.__tracked_scroll_50 = true;
+  }
+
   trackEvent('scroll_50_percent', {
-    engagement_time_msec: Date.now(),
+    scroll_threshold: 50,
   });
 };
 
-// Evento: Tiempo en sitio
+// Time on site (ej: 15, 30, 45... segundos)
 export const trackTimeOnSite = (seconds) => {
   trackEvent('time_on_site', {
-    time_seconds: seconds,
+    time_seconds: Number(seconds) || 0,
   });
 };
 
-// ============================================
-// META PIXEL (Facebook/Instagram Ads)
-// ============================================
-
-export const trackMetaLead = (formData) => {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', 'Lead', {
-      content_name: 'Contact Form',
-      content_category: formData.projectType,
-      value: getBudgetValue(formData.budget),
-      currency: 'EUR',
-    });
-  }
-};
-
-export const trackMetaPageView = () => {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', 'PageView');
-  }
-};
-
-// ============================================
-// GOOGLE ADS CONVERSION TRACKING (CLICK EVENT)
-// ============================================
-
-export const trackGoogleAdsConversion = (formData, url) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    const callback = function () {
-      if (typeof(url) !== 'undefined') {
-        window.location = url;
-      }
-    };
-    
-    window.gtag('event', 'conversion', {
-      'send_to': 'AW-1776522089/3iiYCJjO48obEOm53pc3',
-      'value': getBudgetValue(formData.budget),
-      'currency': 'EUR',
-      'transaction_id': generateTransactionId(),
-      'event_callback': callback
-    });
-  }
-  return false;
-};
-
-// ============================================
+// =============================
 // HELPERS
-// ============================================
-
-// Convertir rango de presupuesto a valor numérico
+// =============================
 const getBudgetValue = (budget) => {
   const budgetMap = {
     '<3000': 2000,
@@ -101,17 +69,14 @@ const getBudgetValue = (budget) => {
   return budgetMap[budget] || 0;
 };
 
-// Generar ID único para transacción
 const generateTransactionId = () => {
-  return `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  return `lead_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
 };
 
-// ============================================
-// DEBUGGING (solo desarrollo)
-// ============================================
-
+// DEBUG (solo dev)
 export const debugTracking = (eventName, data) => {
   if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
     console.log('📊 Tracking Event:', eventName, data);
   }
 };
