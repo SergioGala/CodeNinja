@@ -133,8 +133,8 @@ export default function DesarrolloAppMovil() {
                   <li>✓ Backend básico</li>
                   <li>✓ Auth usuarios</li>
                   <li>✓ 1 mes soporte</li>
-                  <li>✓ 4-8 semanas</li>
-                  <li>✓ Documentation</li>
+                  <li>✓ Desarrollo ágil 4 a 8 semanas</li>
+                  <li>✓ Documentación</li>
                 </ul>
               </div>
             </div>
@@ -156,8 +156,8 @@ export default function DesarrolloAppMovil() {
                   <li>✓ Google Analytics Base</li>
                   <li>✓ 1 mes soporte</li>
                   <li>✓ Pagos integrados</li>
-                  <li>✓ Documentation</li>
-                  <li>✓ 6-12 semanas</li>
+                  <li>✓ Documentación</li>
+                  <li>✓ Plazo de producción 6-12 semanas</li>
                 </ul>
               </div>
             </div>
@@ -178,8 +178,8 @@ export default function DesarrolloAppMovil() {
                   <li>✓ Traking de eventos</li>
                   <li>✓ Pagos in-app</li>
                   <li>✓ 2 meses soporte</li>
-                  <li>✓ Documentation</li>
-                  <li>✓ 8-12+ semanas</li>
+                  <li>✓ Documentación</li>
+                  <li>✓ Tu proyecto listo en dos o tres meses (o más según alcance)</li>
                 </ul>
               </div>
             </div>

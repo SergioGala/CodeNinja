@@ -236,7 +236,7 @@ export default function DesarrolloWebReact() {
                   <li>✓ SEO básico</li>
                   <li>✓ Formulario contacto</li>
                   <li>✓ 1 revisión</li>
-                  <li>✓ 1 semana</li>
+                  <li>✓ Entrega rápida en 7 días</li>
                 </ul>
               </div>
             </div>
@@ -258,7 +258,7 @@ export default function DesarrolloWebReact() {
                   <li>✓ Google Analytics</li>
                   {/* <li>✓ Tracking de eventos</li> */}
                   <li>✓ 2 revisiones</li>
-                  <li>✓ 2-3 semanas</li>
+                  <li>✓ Plazo de producción: 2-3 semanas</li>
                 </ul>
               </div>
             </div>
@@ -277,7 +277,7 @@ export default function DesarrolloWebReact() {
                   <li>✓ Panel admin básico</li>
                   <li>✓ Manual de Usuario</li>
                   <li>✓ 2 revisiones</li>
-                  <li>✓ 4-6 semanas</li>
+                  <li>✓ Desarrollo completo en un plazo estimado de 4-6 semanas</li>
                 </ul>
               </div>
             </div>
