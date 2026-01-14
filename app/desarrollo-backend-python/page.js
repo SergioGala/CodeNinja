@@ -158,7 +158,7 @@ export default function DesarrolloBackendPython() {
                   <li>✓ Autenticación JWT</li>
                   <li>✓ PostgreSQL</li>
                   <li>✓ Documentación</li>
-                  <li>✓ 1-4 semanas</li>
+                  <li>✓ Desarrollo ágil 1 a 4 semanas</li>
                 </ul>
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function DesarrolloBackendPython() {
                   <li>✓ Deploy incluido</li>
                   <li>✓ Cache Redis</li>
                   <li>✓ Testing completo</li>
-                  <li>✓ 2-6 semanas</li>
+                  <li>✓ Plazo de producción 2-6 semanas</li>
                 </ul>
               </div>
             </div>
@@ -199,7 +199,7 @@ export default function DesarrolloBackendPython() {
                   <li>✓ Websockets</li>
                   <li>✓ Cache Redis</li>
                   <li>✓ CI/CD</li>
-                  <li>✓ 4-8+ semanas</li>
+                  <li>✓ Desarrollo completo en un plazo estimado de 4-8+ semanas</li>
                 </ul>
               </div>
             </div>
