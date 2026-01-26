@@ -1,6 +1,3 @@
-
-Copiar
-
 import './globals.css'
 import Script from 'next/script'
 import StructuredData from './components/StructuredData'
