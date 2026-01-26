@@ -756,6 +756,11 @@ export default function Home() {
 
           <div className="border-t border-cyan-500/10 pt-8 text-center">
             <p className="text-gray-500 text-sm">© 2025 JEG Studios. Todos los derechos reservados.</p>
+              <p className="text-gray-600 text-sm mt-2">
+        <Link href="/privacidad" className="hover:text-cyan-400 transition-colors">Política de Privacidad</Link>
+        {' • '}
+        <Link href="/cookies" className="hover:text-cyan-400 transition-colors">Política de Cookies</Link>
+      </p>
           </div>
         </div>
       </footer>
