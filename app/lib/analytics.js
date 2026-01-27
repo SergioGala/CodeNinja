@@ -1,5 +1,4 @@
-// app/lib/analytics.js
-// Tracking FULL GTM vía dataLayer
+// Utilidades para tracking de eventos en GA4 y Meta Pixel
 
 const pushToDataLayer = (payload) => {
   if (typeof window === 'undefined') return;
@@ -7,9 +6,19 @@ const pushToDataLayer = (payload) => {
   window.dataLayer.push(payload);
 };
 
+// ============================================
+// GOOGLE ANALYTICS 4 EVENTS
+// ============================================
+
+// export const trackEvent = (eventName, eventParams = {}) => {
+//   if (typeof window !== 'undefined' && window.gtag) {
+//     window.gtag('event', eventName, eventParams);            // VERSION SERGIO EN EV
+//   }
+// };
+
 export const trackEvent = (eventName, eventParams = {}) => {
   pushToDataLayer({
-    event: eventName,
+    event: eventName,         //GIOVANNY VERSION EN EV
     ...eventParams,
   });
 };
@@ -20,27 +29,38 @@ export const trackEvent = (eventName, eventParams = {}) => {
 
 // Lead (submit real)
 
+// Evento: Envío de formulario
+// export const trackFormSubmit = (formData) => {
+//   trackEvent('form_submit', {
+//     project_type: formData.projectType,      //COMENTADA EN EVALUACION VERSION S
+//     budget: formData.budget,
+//     value: getBudgetValue(formData.budget),
+//     currency: 'EUR',
+//   });
+// };
+
 export const trackLeadFormSubmit = (formData) => {
   const projectType = formData?.projectType || 'otro';
   const value = Number(getProjectValue(projectType)) || 0;
 
   trackEvent('lead_form_submit', {
     email: formData?.email || '',
-    project_type: projectType,
+    project_type: projectType,                                 //GIOVANNY V
     value,                 // viene del helper
     currency: 'EUR',
     transaction_id: generateTransactionId(),
   });
 };
 
-// CTA click
+// Evento: Click en CTA ENVENTO NO HA SUFRIDO CAMBIOS SE DEJA LA MISMA VERSION solo || ''
 export const trackCTAClick = (ctaLocation) => {
   trackEvent('cta_click', {
     location: ctaLocation || '',
   });
 };
 
-// Scroll 50%
+// Evento: Scroll 50% (con dedupe)
+
 export const trackScroll50 = () => {
   // dedupe: dispara 1 vez por sesión
   if (typeof window !== 'undefined') {
@@ -53,51 +73,114 @@ export const trackScroll50 = () => {
   });
 };
 
-// Time on site (ej: 15, 30, 45... segundos)
+// Evento: Tiempo en sitio
 export const trackTimeOnSite = (seconds) => {
   trackEvent('time_on_site', {
     time_seconds: Number(seconds) || 0,
   });
 };
 
-// =============================
+// ============================================
+// META PIXEL (Facebook/Instagram Ads) YA LO HACE TAG MANAGER COMENTADO DE MOMENTO EN EV
+// ============================================
+
+// export const trackMetaLead = (formData) => {
+//   if (typeof window !== 'undefined' && window.fbq) {
+//     window.fbq('track', 'Lead', {
+//       content_name: 'Contact Form',
+//       content_category: formData.projectType,
+//       value: getBudgetValue(formData.budget),
+//       currency: 'EUR',
+//     });
+//   }
+// };
+
+// export const trackMetaPageView = () => {
+//   if (typeof window !== 'undefined' && window.fbq) {
+//     window.fbq('track', 'PageView');
+//   }
+// };
+
+// ============================================
+// // GOOGLE ADS CONVERSION TRACKING (CLICK EVENT) YA LO HACE TAG MANAGER COMENTADO DE MOMENTO EN EV
+// ============================================
+
+// export const trackGoogleAdsConversion = (formData, url) => {
+//   if (typeof window !== 'undefined' && window.gtag) {
+//     const callback = function () {
+//       if (typeof(url) !== 'undefined') {
+//         window.location = url;
+//       }
+//     };
+    
+//     window.gtag('event', 'conversion', {
+//       'send_to': 'AW-1776522089/3iiYCJjO48obEOm53pc3',
+//       'value': getBudgetValue(formData.budget),
+//       'currency': 'EUR',
+//       'transaction_id': generateTransactionId(),
+//       'event_callback': callback
+//     });
+//   }
+//   return false;
+// };
+
+// ============================================
 // HELPERS
 // ============================================
 
 // Convertir rango de presupuesto a valor numérico
-
-// const getBudgetValue = (budget) => {
-//   const budgetMap = {
-//     '<3000': 2000,
-//     '3000-6000': 4500,
-//     '6000-12000': 9000,
-//     '>12000': 15000,
-//   };
-//   return budgetMap[budget] || 0;
-// };
-
+// Valores promedio por tipo de proyecto (Enero-Marzo 2025)
+//Nuevos valores estrategia agresiva sin harcoded
 export const getProjectValue = (projectType) => {
   const projectValues = {
-    'web': 1500, // Landing/web básica Promedio real: €999-1,999
-    'ecommerce': 3500, // Tienda online básica Promedio real: €2,499-4,999
-    'app': 4000, // MVP app móvil Promedio real:  real: €2,999-5,999
-    'backend': 1200, // Backend/API más económico promedio real: €799-1,999
-    'otro': 2000, // Otros proyectos promedio: Promedio general
+    'web': 1200,       // Básica €599 / Popular €999 / E-commerce €1,999
+    'ecommerce': 1999, // Tienda online (precio único) promedio entre 1999-2999
+    'app': 3300,       // Básica €1,999 / Popular €2,999 / Avanzada €5,000
+    'backend': 1100,   // Básica €400 / Popular €799 / Avanzada €1,999
+    'otro': 1900,      // Promedio general otros proyectos
   };
 
- // Devolver valor según tipo, o 2000 por defecto
+  return projectValues[projectType] || 1900;
+};
 
-  return projectValues[projectType] || 2000;
-}
-
+// Generar ID único para transacción
 const generateTransactionId = () => {
   return `lead_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
 };
 
-// DEBUG (solo dev)
+// ============================================
+// DEBUGGING (solo desarrollo)
+// ============================================
+
 export const debugTracking = (eventName, data) => {
   if (process.env.NODE_ENV === 'development') {
-    // eslint-disable-next-line no-console
     console.log('📊 Tracking Event:', eventName, data);
   }
 };
+
+//NOTAS IMPORTANTES
+// ### **SE HA ELIMINADO VS**
+// ```
+// trackMetaLead() - GTM lo maneja
+// trackMetaPageView() - GTM lo maneja
+// trackGoogleAdsConversion() - GTM lo maneja
+// getBudgetValue() - Hardcodeado y obsoleto
+// trackScroll50() simple - Sin dedupe
+// trackTimeOnSite() sin validación
+// ```
+
+// ---
+
+// ### **ACTUALIZAR valores:**
+// ```
+// ANTES (precios altos):
+// web: 1500
+// ecommerce: 3500
+// app: 4000
+// backend: 1200
+
+// AHORA (estrategia agresiva Ene-Mar):
+// web: 1200       ↓ -€300
+// ecommerce: 1999 ↓ -€1,501
+// app: 3300       ↓ -€700
+// backend: 1100   ↓ -€100

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Desarrollo Backend Python Madrid | FastAPI, Django | JEG Studios',
-  description: 'Desarrollo backend profesional con Python Flask y FastAPI en Madrid. APIs REST escalables, microservicios y arquitecturas cloud. Desde 799€.',
+  description: 'Desarrollo backend profesional con Python y FastAPI en Madrid. APIs REST escalables, microservicios y arquitecturas cloud. Desde 400€.',
   keywords: [
     'desarrollo backend python madrid',
     'programadores python madrid',
@@ -13,7 +13,7 @@ export const metadata = {
   ],
   openGraph: {
     title: 'Desarrollo Backend Python Madrid | JEG Studios',
-    description: 'Backend profesional con Python Flask y FastAPI. APIs escalables desde 799€.',
+    description: 'Backend profesional con Python y FastAPI. APIs escalables desde 400€.',
     url: 'https://jegsdev.com/desarrollo-backend-python',
   },
 }
@@ -46,7 +46,7 @@ export default function DesarrolloBackendPython() {
           
           <p className="text-xl text-gray-400 mb-8 leading-relaxed">
             Arquitecturas backend escalables con <strong className="text-white">Python</strong>, <strong className="text-white">Flask</strong>, <strong className="text-white">FastAPI</strong> y <strong className="text-white">PostgreSQL</strong>. 
-            APIs REST, microservicios y cloud. Desde 799€.
+            APIs REST, microservicios y cloud. Desde 400€.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -150,7 +150,7 @@ export default function DesarrolloBackendPython() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">API Básica</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  799€
+                  400€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ CRUD completo</li>
@@ -158,7 +158,7 @@ export default function DesarrolloBackendPython() {
                   <li>✓ Autenticación JWT</li>
                   <li>✓ PostgreSQL</li>
                   <li>✓ Documentación</li>
-                  <li>✓ Desarrollo ágil 1 a 4 semanas</li>
+                  <li>✓ Desarrollo ágil 2 a 7 dias</li>
                 </ul>
               </div>
             </div>
@@ -170,17 +170,16 @@ export default function DesarrolloBackendPython() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">API Completa</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  1.999€
+                  799€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
-                  <li>✓ Multi-endpoints</li>
                   <li>✓ Base de datos diseñada</li>
-                  {/* <li>✓ Websockets</li> DE MOMENTO SOLO CACHE REDIS*/} 
-                  <li>✓ API REST</li>
+                  <li>✓ Multi-endpoints</li>
+                  {/* <li>✓ Websockets</li> */}
                   <li>✓ Deploy incluido</li>
                   <li>✓ Cache Redis</li>
                   <li>✓ Testing completo</li>
-                  <li>✓ Plazo de producción 2-6 semanas</li>
+                  <li>✓ Plazo de producción 1-6 semanas</li>
                 </ul>
               </div>
             </div>
@@ -189,7 +188,7 @@ export default function DesarrolloBackendPython() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">Microservicios</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  +4.999€
+                  +1.999€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ Arquitectura distribuida</li>
@@ -199,7 +198,8 @@ export default function DesarrolloBackendPython() {
                   <li>✓ Websockets</li>
                   <li>✓ Cache Redis</li>
                   <li>✓ CI/CD</li>
-                  <li>✓ Desarrollo completo en un plazo estimado de 4-8+ semanas</li>
+                  <li>✓ 8+ semanas</li>
+                  <li>✓ Desarrollo completo en un plazo estimado de 2-8+ semanas</li>
                 </ul>
               </div>
             </div>
@@ -230,7 +230,7 @@ export default function DesarrolloBackendPython() {
 
       <footer className="border-t border-cyan-500/10 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p>© 2025 JEG Studios - Desarrollo Backend Python Madrid</p>
+          <p>© 2026 JEG Studios - Desarrollo Backend Python Madrid</p>
           <p className="mt-2">
             <Link href="/" className="hover:text-cyan-400 transition-colors">Inicio</Link>
             {' • '}

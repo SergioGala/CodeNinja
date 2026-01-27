@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Desarrollo App Móvil Madrid | React Native iOS Android | JEG Studios',
-  description: 'Desarrollo de aplicaciones móviles con React Native en Madrid. Apps nativas para iOS y Android con una sola base de código. Presupuesto desde 5.000€.',
+  description: 'Desarrollo de aplicaciones móviles con React Native en Madrid. Apps nativas para iOS y Android con una sola base de código. Presupuesto desde 1.999€.',
   keywords: [
     'desarrollo app móvil madrid',
     'react native madrid',
@@ -14,7 +14,7 @@ export const metadata = {
   ],
   openGraph: {
     title: 'Desarrollo App Móvil Madrid | JEG Studios',
-    description: 'Apps móviles nativas con React Native. iOS y Android. Desde 5.000€.',
+    description: 'Apps móviles nativas con React Native. iOS y Android. Desde 1.999€.',
     url: 'https://jegsdev.com/desarrollo-app-movil',
   },
 }
@@ -48,7 +48,7 @@ export default function DesarrolloAppMovil() {
           <p className="text-xl text-gray-400 mb-8 leading-relaxed">
             Creamos aplicaciones móviles nativas con <strong className="text-white">React Native</strong>. 
             Un solo código para <strong className="text-white">iOS</strong> y <strong className="text-white">Android</strong>. 
-            Entrega en 4-12 semanas desde 2.999€.
+            Entrega en 2-6 semanas desde 1.999€.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -125,7 +125,7 @@ export default function DesarrolloAppMovil() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">App Básica</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  2.999€
+                  1.999€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ 3-5 pantallas</li>
@@ -133,7 +133,7 @@ export default function DesarrolloAppMovil() {
                   <li>✓ Backend básico</li>
                   <li>✓ Auth usuarios</li>
                   <li>✓ 1 mes soporte</li>
-                  <li>✓ Desarrollo ágil 4 a 8 semanas</li>
+                  <li>✓ Desarrollo ágil 2 a 6 semanas</li>
                   <li>✓ Documentación</li>
                 </ul>
               </div>
@@ -146,10 +146,10 @@ export default function DesarrolloAppMovil() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">App Completa</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  5.999€
+                  2.999€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
-                  <li>✓ 10-15 pantallas</li>
+                  <li>✓ 8-10 pantallas</li>
                   <li>✓ API completa</li>
                   <li>✓ Push notifications</li>
                   <li>✓ Integraciones API</li>
@@ -157,7 +157,7 @@ export default function DesarrolloAppMovil() {
                   <li>✓ 1 mes soporte</li>
                   <li>✓ Pagos integrados</li>
                   <li>✓ Documentación</li>
-                  <li>✓ Plazo de producción 6-12 semanas</li>
+                  <li>✓ Plazo de producción 6-8 semanas</li>
                 </ul>
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function DesarrolloAppMovil() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">App Compleja</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  +12.999€
+                  +5.000€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ Social features complejas</li>
@@ -179,7 +179,7 @@ export default function DesarrolloAppMovil() {
                   <li>✓ Pagos in-app</li>
                   <li>✓ 2 meses soporte</li>
                   <li>✓ Documentación</li>
-                  <li>✓ Tu proyecto listo en dos o tres meses (o más según alcance)</li>
+                  <li>✓ Tu proyecto listo de uno a tres meses (o más según alcance)</li>
                 </ul>
               </div>
             </div>
@@ -210,7 +210,7 @@ export default function DesarrolloAppMovil() {
 
       <footer className="border-t border-purple-500/10 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p>© 2025 JEG Studios - Desarrollo Apps Móviles Madrid</p>
+          <p>© 2026 JEG Studios - Desarrollo Apps Móviles Madrid</p>
           <p className="mt-2">
             <Link href="/" className="hover:text-purple-400 transition-colors">Inicio</Link>
             {' • '}

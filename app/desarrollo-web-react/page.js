@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Desarrollo Web React Madrid | Next.js, Tailwind | JEG Studios',
-  description: 'Desarrollo web profesional con React y Next.js en Madrid. Aplicaciones web rápidas, modernas y SEO-optimizadas. Presupuesto desde 3.000€. Consultoría gratuita.',
+  description: 'Desarrollo web profesional con React y Next.js en Madrid. Aplicaciones web rápidas, modernas y SEO-optimizadas. Presupuesto desde 599. Consultoría gratuita.',
   keywords: [
     'desarrollo web react madrid',
     'programadores react madrid',
@@ -14,7 +14,7 @@ export const metadata = {
   ],
   openGraph: {
     title: 'Desarrollo Web React Madrid | JEG Studios',
-    description: 'Desarrollo web profesional con React y Next.js en Madrid. Presupuesto desde 3.000€.',
+    description: 'Desarrollo web profesional con React y Next.js en Madrid. Presupuesto desde 599€.',
     url: 'https://jegsdev.com/desarrollo-web-react',
   },
 }
@@ -49,7 +49,7 @@ export default function DesarrolloWebReact() {
           
           <p className="text-xl text-gray-400 mb-8 leading-relaxed">
             Creamos aplicaciones web modernas, rápidas y escalables con <strong className="text-white">React</strong>, <strong className="text-white">Next.js</strong> y <strong className="text-white">Tailwind CSS</strong>. 
-            Entrega en 1-4 semanas desde 999€.
+            Entrega 48-72h desde 599€.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -228,7 +228,7 @@ export default function DesarrolloWebReact() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">Landing Page</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                  €999
+                  599€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ Landing page React/Next.js</li>
@@ -236,7 +236,7 @@ export default function DesarrolloWebReact() {
                   <li>✓ SEO básico</li>
                   <li>✓ Formulario contacto</li>
                   <li>✓ 1 revisión</li>
-                  <li>✓ Entrega rápida en 7 días</li>
+                  <li>✓ Entrega rápida en 24/48h</li>
                 </ul>
               </div>
             </div>
@@ -248,17 +248,16 @@ export default function DesarrolloWebReact() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">Web Completa</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                   €1.999
+                  999€
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ Multi-página</li>
                   <li>✓ CMS integrado</li>
-                  {/* <li>✓ Autenticación</li> */}
-                  <li>✓ Dashboard admin</li>
+                  <li>✓ Autenticación</li>
                   <li>✓ Google Analytics</li>
-                  {/* <li>✓ Tracking de eventos</li> */}
                   <li>✓ 2 revisiones</li>
-                  <li>✓ Plazo de producción: 2-3 semanas</li>
+                  <li>✓ Dashboard admin</li>
+                  <li>✓ Entrega rápida en menos de 7 días</li>
                 </ul>
               </div>
             </div>
@@ -267,7 +266,7 @@ export default function DesarrolloWebReact() {
               <div className="text-center">
                 <h3 className="font-display text-xl font-bold text-white mb-2">E-commerce</h3>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                 desde €2.499
+                  1.999
                 </div>
                 <ul className="text-sm text-gray-400 space-y-2 text-left">
                   <li>✓ Catálogo productos</li>
@@ -277,7 +276,7 @@ export default function DesarrolloWebReact() {
                   <li>✓ Panel admin básico</li>
                   <li>✓ Manual de Usuario</li>
                   <li>✓ 2 revisiones</li>
-                  <li>✓ Desarrollo completo en un plazo estimado de 4-6 semanas</li>
+                  <li>✓ Desarrollo completo en un plazo estimado de 2-6 semanas</li>
                 </ul>
               </div>
             </div>
@@ -309,7 +308,7 @@ export default function DesarrolloWebReact() {
       {/* Footer simple */}
       <footer className="border-t border-cyan-500/10 py-8 px-4">
         <div className="max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p>© 2025 JEG Studios - Desarrollo Web React Madrid</p>
+          <p>© 2026 JEG Studios - Desarrollo Web React Madrid</p>
           <p className="mt-2">
             <Link href="/" className="hover:text-cyan-400 transition-colors">Inicio</Link>
             {' • '}

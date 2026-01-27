@@ -4,6 +4,7 @@ import { useState, lazy, Suspense, useEffect } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+// import { trackLeadFormSubmit, trackCTAClick, trackScroll50, trackTimeOnSite, } from './lib/analytics' // no hace falta trackMetaLead, trackGoogleAdsConversion
 import { trackLeadFormSubmit, trackCTAClick, trackScroll50, trackTimeOnSite } from './lib/analytics'
 
 const JEGSLogo = dynamic(() => import('./components/JEGSLogo'), {
@@ -106,7 +107,10 @@ export default function Home() {
         }),
       })
 
-      if (!response.ok) {
+      // if (response.ok) {
+      //   setFormStatus('success') VERSION ANTIGUA VS
+
+        if (!response.ok) {
         // opcional: leer body para ver el motivo
         let errText = ''
         try { errText = await response.text() } catch (_) { }
@@ -116,29 +120,25 @@ export default function Home() {
         setTimeout(() => setFormStatus(''), 5000)
         return
       }
-
-      {/*HARCODEO: A IMPLEMENTAR:
-        SE HA IMPLEMENTADO UNA SOLUCION ELIMINANDO DATOS HARCODEADO QUE RETORNAN SIEMPRE 
-        EL MISMO VALOR 4500 EN OBSERVACION POR SI FUNCIONA ESTA IMPLEMENTACION... */}
-      //
-      // trackFormSubmit({
-      //   email: formData.email,
-      //   projectType: formData.projectType,
-      //   budget: '3000-6000',
-      // })
-      // trackMetaLead({
-      //   email: formData.email,
-      //   projectType: formData.projectType,
-      //   budget: '3000-6000',
-      // })
-      // trackGoogleAdsConversion({
-      //   email: formData.email,
-      //   projectType: formData.projectType,
-      //   budget: '3000-6000',
-      // })
-
+        
+      // HARCODE ELIMINADO EN OBSERVACION YA SE MANEJA EN ANALITICS
+        // trackFormSubmit({
+        //   email: formData.email,
+        //   projectType: formData.projectType,
+        //   budget: '3000-6000',
+        // })
+        // trackMetaLead({
+        //   email: formData.email,
+        //   projectType: formData.projectType,
+        //   budget: '3000-6000',
+        // })
+        // trackGoogleAdsConversion({
+        //   email: formData.email,
+        //   projectType: formData.projectType,
+        //   budget: '3000-6000',
+        // })
+        
       //  SOLO SI EL ENVÍO ES OK: disparamos el LEAD real
-
       trackLeadFormSubmit({
         email: formData.email,
         projectType: formData.projectType,
@@ -146,28 +146,27 @@ export default function Home() {
 
       setFormStatus('success')
 
-      setFormData({
-        email: '',
-        projectType: '',
-        description: '',
-        privacy: false,
-      })
+        setFormData({
+          email: '',
+          projectType: '',
+          description: '',
+          privacy: false,
+        })
 
-      setTimeout(() => setFormStatus(''), 5000)
-
-    } catch (error) {
+        setTimeout(() => setFormStatus(''), 5000)
+      } catch (error) {
       console.error('Error:', error)
       setFormStatus('error')
       setTimeout(() => setFormStatus(''), 5000)
     }
   }
 
-
-
-  useEffect(() => {
+   useEffect(() => {
     // Esto previene warnings de hidratación por extensiones del navegador
     if (typeof window !== 'undefined') {
       // Fuerza la hidratación después del primer render
+      // Previene warnings de hidratación
+
     }
   }, [])
 
@@ -181,10 +180,11 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${showStickyNav
-        ? 'backdrop-blur-xl bg-[#0a0a0f]/95 border-b border-cyan-500/20 shadow-lg'
-        : 'backdrop-blur-xl bg-[#0a0a0f]/80 border-b border-cyan-500/10'
-        }`}>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        showStickyNav 
+          ? 'backdrop-blur-xl bg-[#0a0a0f]/95 border-b border-cyan-500/20 shadow-lg' 
+          : 'backdrop-blur-xl bg-[#0a0a0f]/80 border-b border-cyan-500/10'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="font-display text-xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
@@ -206,10 +206,11 @@ export default function Home() {
             <a
               href="#contacto"
               onClick={() => trackCTAClick('nav_cta')}
-              className={`relative group font-semibold text-white hover:opacity-90 transition-all ${showStickyNav
-                ? 'px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg shadow-lg shadow-cyan-500/20'
-                : 'px-6 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg'
-                }`}
+              className={`relative group font-semibold text-white hover:opacity-90 transition-all ${
+                showStickyNav 
+                  ? 'px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg shadow-lg shadow-cyan-500/20' 
+                  : 'px-6 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg'
+              }`}
             >
               {showStickyNav ? 'Solicitar Presupuesto' : 'Hablemos'}
             </a>
@@ -239,7 +240,7 @@ export default function Home() {
 
               <p className="text-xl text-gray-400 mb-8 leading-relaxed">
                 Equipo de desarrolladores senior especializados en <span className="text-cyan-400 font-semibold">React</span>, <span className="text-purple-400 font-semibold">Python</span> y <span className="text-cyan-400 font-semibold">Node.js</span>.
-                <br />Lanzamos tu MVP en 1-6 semanas con calidad asegurada.
+                <br />Lanzamos tu MVP en tan solo 48h con calidad asegurada.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -266,8 +267,8 @@ export default function Home() {
                   <div className="text-gray-500 text-sm mt-1">Años Experiencia</div>
                 </div>
                 <div>
-                  <div className="font-display text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">4-6</div>
-                  <div className="text-gray-500 text-sm mt-1">Semanas MVP</div>
+                  <div className="font-display text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">48h</div>
+                  <div className="text-gray-500 text-sm mt-1">Horas MVP</div>
                 </div>
                 <div>
                   <div className="font-display text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">50+</div>
@@ -297,14 +298,14 @@ export default function Home() {
               Presupuesto Gratis en 24h
             </h2>
             <p className="text-xl text-gray-400">
-              Cuéntanos tu proyecto. Te respondemos mañana.
+              Cuéntanos tu proyecto. Te respondemos al instante.
             </p>
           </div>
 
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition" />
             <form onSubmit={handleSubmit} className="relative bg-[#0a0a0f] rounded-3xl p-8 md:p-12 border border-cyan-500/10">
-
+              
               {/* SOLO 3 CAMPOS */}
               <div className="mb-6">
                 <label htmlFor="email" className="block text-lg font-semibold text-white mb-3">Tu email *</label>
@@ -486,41 +487,33 @@ export default function Home() {
               {
                 title: 'Desarrollo Web',
                 techs: ['React', 'Next.js', 'Tailwind'],
-                // time: '4-8 semanas',
-                time: '1-4 semanas',
-                // price: 'Desde 3.000€',
-                price: 'Desde 999€',
+                time: '24-48 Horas',
+                price: 'Desde 599€',
                 description: 'Aplicaciones web modernas y SEO-optimizadas.',
                 link: '/desarrollo-web-react',
               },
               {
                 title: 'Apps Móviles',
                 techs: ['React Native', 'iOS', 'Android'],
-                // time: '6-12 semanas', bajado el tiempo de entrega 
-                time: '4-12 semanas',
-                // price: 'Desde 5.000€',
-                price: 'Desde 2.999€',
+                time: '2-6 semanas',
+                price: 'Desde 1.999€',
                 description: 'Apps nativas con una sola base de código.',
                 link: '/desarrollo-app-movil',
               },
               {
                 title: 'Backend & APIs',
                 techs: ['Python', 'Node.js', 'PostgreSQL'],
-                // time: '3-6 semanas', baje el tiempo de entrega
-                time: '1-6 semanas',
-                // price: 'Desde 2.500€',
-                price: 'Desde 799€',
+                time: '48-72h',
+                price: 'Desde 400€',
                 description: 'Arquitecturas escalables y seguras.',
                 link: '/desarrollo-backend-python',
               },
               {
                 title: 'Consultoría Técnica',
-                techs: ['Architecture', 'Code Review', 'Other Services'],
+                techs: ['Architecture', 'Code Review'],
                 time: 'Flexible',
-                // price: 'Desde 1.000€',
-                price: 'Desde 499€',
-                description: 'Auditoría optimización de código y otros servicios.',
-                link: '#contacto',
+                price: 'Desde 299€',
+                description: 'Auditoría optimización de código y otros servicios.',                link: '#contacto',
               }
             ].map((service, index) => (
               <div key={index} className="group relative">
@@ -542,7 +535,7 @@ export default function Home() {
                     <span className="font-display text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                       {service.price}
                     </span>
-                    <Link
+                    <Link 
                       href={service.link}
                       onClick={() => trackCTAClick(`service_${service.title.toLowerCase().replace(/ /g, '_')}`)}
                       className="text-cyan-400 font-semibold hover:text-purple-400 transition-colors inline-flex items-center gap-1"
@@ -568,7 +561,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* También Ofrecemos NUEVA SECCIÓN*/}
+
+      {/* También Ofrecemos NUEVA SECCIÓN AGREGADO NUEVAMENTE */}
 
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-[#0a0a0f]">
         <div className="max-w-7xl mx-auto">
@@ -659,9 +653,9 @@ export default function Home() {
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="font-display text-xl font-bold text-white">{project.name}</h3>
-                      <a
-                        href={project.url}
-                        target="_blank"
+                      <a 
+                        href={project.url} 
+                        target="_blank" 
                         rel="noopener noreferrer"
                         onClick={() => trackCTAClick(`portfolio_${project.name.toLowerCase().replace(/ /g, '_')}`)}
                         className="text-cyan-400 hover:text-purple-400 transition-colors"
@@ -752,8 +746,8 @@ export default function Home() {
               <h4 className="font-display font-bold mb-4 text-white">Servicios</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link
-                    href="/desarrollo-web-react"
+                  <Link  
+                    href="/desarrollo-web-react" 
                     onClick={() => trackCTAClick('footer_servicios_web')}
                     className="hover:text-cyan-400 transition-colors"
                   >
@@ -761,8 +755,8 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/desarrollo-app-movil"
+                  <Link  
+                    href="/desarrollo-app-movil"  
                     onClick={() => trackCTAClick('footer_servicios_mobile')}
                     className="hover:text-cyan-400 transition-colors"
                   >
@@ -770,8 +764,8 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/desarrollo-backend-python"
+                  <Link  
+                    href="/desarrollo-backend-python"  
                     onClick={() => trackCTAClick('footer_servicios_backend')}
                     className="hover:text-cyan-400 transition-colors"
                   >
@@ -785,7 +779,7 @@ export default function Home() {
               <h4 className="font-display font-bold mb-4 text-white">Empresa</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <a
+                  <a 
                     href="#portfolio"
                     onClick={() => trackCTAClick('footer_portfolio')}
                     className="hover:text-cyan-400 transition-colors"
@@ -794,7 +788,7 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <a
+                  <a 
                     href="#proceso"
                     onClick={() => trackCTAClick('footer_proceso')}
                     className="hover:text-cyan-400 transition-colors"
@@ -803,7 +797,7 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <a
+                  <a 
                     href="#contacto"
                     onClick={() => trackCTAClick('footer_contacto')}
                     className="hover:text-cyan-400 transition-colors"
@@ -816,7 +810,7 @@ export default function Home() {
 
             <div>
               <h4 className="font-display font-bold mb-4 text-white">Contacto</h4>
-              <a
+              <a 
                 href="mailto:jegstudiotech@gmail.com"
                 onClick={() => trackCTAClick('footer_email')}
                 className="text-gray-400 hover:text-cyan-400 transition-colors"
@@ -827,7 +821,12 @@ export default function Home() {
           </div>
 
           <div className="border-t border-cyan-500/10 pt-8 text-center">
-            <p className="text-gray-500 text-sm">© 2025 JEG Studios. Todos los derechos reservados.</p>
+            <p className="text-gray-500 text-sm">© 2026 JEG Studios. Todos los derechos reservados.</p>
+              <p className="text-gray-600 text-sm mt-2">
+        <Link href="/privacidad" className="hover:text-cyan-400 transition-colors">Política de Privacidad</Link>
+        {' • '}
+        <Link href="/cookies" className="hover:text-cyan-400 transition-colors">Política de Cookies</Link>
+      </p>
           </div>
         </div>
       </footer>
